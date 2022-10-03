@@ -11,12 +11,9 @@ class PixelShader;
 class GraphicsEngine
 {
 public:
-	GraphicsEngine();
-	//Initialize the GraphicsEngine and DirectX 11 Device
-	bool init();
-	//Release all the resources loaded
-	bool release();
-	~GraphicsEngine();
+	static GraphicsEngine* getInstance();
+	static void initialize();
+	static void destroy();
 public:
 	SwapChain* createSwapChain();
 	DeviceContext* getImmediateDeviceContext();
@@ -32,6 +29,16 @@ public:
 public:
 	static GraphicsEngine* get();
 
+private:
+	GraphicsEngine();
+	~GraphicsEngine();
+	GraphicsEngine(GraphicsEngine const&) {};
+	GraphicsEngine& operator=(GraphicsEngine const&) {};
+	static GraphicsEngine* sharedInstance;
+	//Initialize the GraphicsEngine and DirectX 11 Device
+	bool init();
+	//Release all the resources loaded
+	bool release();
 private:
 	DeviceContext* m_imm_device_context;
 private:

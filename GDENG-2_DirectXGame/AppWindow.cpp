@@ -85,7 +85,7 @@ void AppWindow::onUpdate()
 	Window::onUpdate();
 	//CLEAR THE RENDER TARGET 
 	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,
-		0.9f, 0.6f,0.9f, 0.6f);
+		0.9f, 0.6f, 0.9f, 1.0f);
 	//SET VIEWPORT OF RENDER TARGET IN WHICH WE HAVE TO DRAW
 	RECT rc = this->getClientWindowRect();
 	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);

@@ -12,6 +12,24 @@ GraphicsEngine::GraphicsEngine()
 {
 }
 
+GraphicsEngine* GraphicsEngine::getInstance()
+{
+	return nullptr;
+}
+
+void GraphicsEngine::initialize()
+{
+	sharedInstance = new GraphicsEngine();
+	sharedInstance->init();
+}
+
+void GraphicsEngine::destroy()
+{
+	if (sharedInstance != NULL) {
+		sharedInstance->release();
+	}
+}
+
 bool GraphicsEngine::init()
 {
 	D3D_DRIVER_TYPE driver_types[] =
