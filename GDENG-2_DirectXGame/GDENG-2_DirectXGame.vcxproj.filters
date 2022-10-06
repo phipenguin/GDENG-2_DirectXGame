@@ -28,6 +28,18 @@
     <Filter Include="GameEngine\GraphicsEngine\PixelShader">
       <UniqueIdentifier>{f3202cd1-eca3-4d6d-ab40-99dd4fa46337}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\GameObjects">
+      <UniqueIdentifier>{b1113df8-f9c3-42a1-8b95-a71c4078b461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObjects\AGameObject">
+      <UniqueIdentifier>{9ec5a80c-8299-429d-b68e-799a6573a4aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObjects\Quad">
+      <UniqueIdentifier>{bbfcb4be-8029-4565-a351-4a5f02baf787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicsEngine\RenderSystem">
+      <UniqueIdentifier>{952e6637-8f07-4560-b6fc-363fe3b06b3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,6 +69,15 @@
     <ClCompile Include="PixelShader.cpp">
       <Filter>GameEngine\GraphicsEngine\PixelShader</Filter>
     </ClCompile>
+    <ClCompile Include="AGameObject.cpp">
+      <Filter>GameEngine\GameObjects\AGameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Quad.cpp">
+      <Filter>GameEngine\GameObjects\Quad</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>GameEngine\GraphicsEngine\RenderSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -82,6 +103,15 @@
     </ClInclude>
     <ClInclude Include="PixelShader.h">
       <Filter>GameEngine\GraphicsEngine\PixelShader</Filter>
+    </ClInclude>
+    <ClInclude Include="AGameObject.h">
+      <Filter>GameEngine\GameObjects\AGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>GameEngine\GameObjects\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>GameEngine\GraphicsEngine\RenderSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
