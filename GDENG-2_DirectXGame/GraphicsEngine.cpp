@@ -8,13 +8,15 @@
 
 #include <d3dcompiler.h>
 
+GraphicsEngine* GraphicsEngine::sharedInstance = NULL;
+
 GraphicsEngine::GraphicsEngine()
 {
 }
 
 GraphicsEngine* GraphicsEngine::getInstance()
 {
-	return nullptr;
+	return sharedInstance;
 }
 
 void GraphicsEngine::initialize()
@@ -174,10 +176,4 @@ bool GraphicsEngine::compilePixelShader(const wchar_t* file_name, const char* en
 void GraphicsEngine::releaseCompiledShader()
 {
 	if (m_blob) m_blob->Release();
-}
-
-GraphicsEngine* GraphicsEngine::get()
-{
-	static GraphicsEngine engine;
-	return &engine;
 }

@@ -4,15 +4,14 @@
 
 int main()
 {
-	AppWindow app;
-	if (app.init())
-	{
-		while (app.isRun())
-		{
-			app.broadcast();
-		}
-	}
+	AppWindow::initialize();
+	AppWindow* runningApp = (AppWindow*)AppWindow::getInstance();
+	runningApp->createGraphicsWindow();
 
+	while (runningApp->isRun())
+	{
+		runningApp->broadcast();
+	}
 
 	return 0;
 }
