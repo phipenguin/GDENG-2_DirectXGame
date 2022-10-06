@@ -9,16 +9,7 @@ struct vec3
 struct vertex
 {
 	vec3 position;
-	vec3 position1;
 	vec3 color;
-	vec3 color1;
-};
-
-
-__declspec(align(16))
-struct constant
-{
-	float m_angle;
 };
 
 AppWindow* AppWindow::sharedInstance = NULL;
@@ -60,20 +51,6 @@ void AppWindow::onUpdate()
 	RECT rc = this->getClientWindowRect();
 	graphicsEngine->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-	unsigned long new_time = 0;
-	if (m_old_time)
-		new_time = ::GetTickCount() - m_old_time;
-	m_delta_time = new_time / 1000.0f;
-	m_old_time = ::GetTickCount();
-	m_angle += 1.57f * m_delta_time;
-	constant cc;
-	cc.m_angle = m_angle;
-
-	m_cb->update(graphicsEngine->getImmediateDeviceContext(), &cc);
-
-	graphicsEngine->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
-	graphicsEngine->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
-
 	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
 	graphicsEngine->getImmediateDeviceContext()->setVertexShader(m_vs);
 	graphicsEngine->getImmediateDeviceContext()->setPixelShader(m_ps);
@@ -111,10 +88,10 @@ void AppWindow::createGraphicsWindow()
 	{
 		//X - Y - Z
 		//Quadrilateral
-		{-0.5f,-0.5f,0.0f,	-0.32f,-0.11f,0.0f,		1,0,0,	0,1,0 }, // POS1
-		{-0.5f,0.5f,0.0f,	-0.11f,0.78f,0.0f,		0,1,0,	0,1,1 }, // POS2
-		{ 0.5f,-0.5f,0.0f,	 0.75f,-0.73f,0.0f,		0,0,1,	1,0,0 }, // POS3
-		{ 0.5f,0.5f,0.0f,	 0.88f,0.77f,0.0f,		0,1,1,	0,0,1 }  // POS4
+		{-0.5f,-0.5f,0.0f,   0,0,0}, // POS1
+		{-0.5f,0.5f,0.0f,    1,1,0}, // POS2
+		{ 0.5f,-0.5f,0.0f,   0,0,1},// POS2
+		{ 0.5f,0.5f,0.0f,    1,1,1}
 
 		//Triangle
 		/*{-0.5f,-0.5f,0.0f,	1,0,0}, // POS1
@@ -138,11 +115,4 @@ void AppWindow::createGraphicsWindow()
 	graphicsEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
 	m_ps = graphicsEngine->createPixelShader(shader_byte_code, size_shader);
 	graphicsEngine->releaseCompiledShader();
-
-	constant cc;
-	cc.m_angle = 0;
-
-	m_cb = graphicsEngine->createConstantBuffer();
-	m_cb->load(&cc, sizeof(constant));
-
 }
