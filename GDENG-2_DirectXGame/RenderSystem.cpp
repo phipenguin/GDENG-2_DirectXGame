@@ -1,0 +1,46 @@
+#include "RenderSystem.h"
+
+RenderSystem* RenderSystem::sharedInstance = NULL;
+
+void RenderSystem::initialize()
+{
+	sharedInstance = new RenderSystem();
+}
+
+void RenderSystem::destroy()
+{
+	delete sharedInstance;
+}
+
+RenderSystem* RenderSystem::getInstance()
+{
+    return sharedInstance;
+}
+
+void RenderSystem::initializeQuads(int num, void* shader_byte_code, size_t size_shader)
+{
+	Quad* quadrilateral = new Quad();
+    quadrilateral->initializeObject(num, shader_byte_code, size_shader);
+
+    if (quadrilateral != nullptr) {
+        quadsList.push_front(quadrilateral);
+    } 
+}
+
+void RenderSystem::drawQuads(VertexShader* vertex_shader, PixelShader* pixel_shader)
+{
+    //Iterate through the list of quads
+    for (auto const& i : quadsList)
+    {
+        i->setAnimSpeed(1.57f, 10.0f);
+        i->drawObject(vertex_shader, pixel_shader);
+    }
+}
+
+RenderSystem::RenderSystem()
+{
+}
+
+RenderSystem::~RenderSystem()
+{
+}

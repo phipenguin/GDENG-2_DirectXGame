@@ -34,6 +34,18 @@
     <Filter Include="GameEngine\EngineTime">
       <UniqueIdentifier>{b06af065-e652-45a7-ad02-1c4fec1d65b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\GraphicsEngine\RenderSystem">
+      <UniqueIdentifier>{22e31ccf-6c20-4015-9fef-65e1f0584b69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObject">
+      <UniqueIdentifier>{0cf08f55-4193-4127-8b50-fa544efee847}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObject\AGameObject">
+      <UniqueIdentifier>{2d3b3631-9d1c-46bc-abb0-eb969aaf221c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObject\Quad">
+      <UniqueIdentifier>{15c570ee-864c-420e-9a00-86bf0a94b3ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,6 +81,15 @@
     <ClCompile Include="EngineTime.cpp">
       <Filter>GameEngine\EngineTime</Filter>
     </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>GameEngine\GraphicsEngine\RenderSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="AGameObject.cpp">
+      <Filter>GameEngine\GameObject\AGameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Quad.cpp">
+      <Filter>GameEngine\GameObject\Quad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -100,6 +121,15 @@
     </ClInclude>
     <ClInclude Include="EngineTime.h">
       <Filter>GameEngine\EngineTime</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>GameEngine\GraphicsEngine\RenderSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="AGameObject.h">
+      <Filter>GameEngine\GameObject\AGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>GameEngine\GameObject\Quad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
