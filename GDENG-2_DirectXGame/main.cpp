@@ -5,6 +5,7 @@
 int main()
 {
 	AppWindow::initialize();
+	EngineTime::initialize();
 	AppWindow* runningApp = (AppWindow*)AppWindow::getInstance();
 	runningApp->createGraphicsWindow();
 

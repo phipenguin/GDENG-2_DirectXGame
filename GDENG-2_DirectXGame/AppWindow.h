@@ -34,7 +34,7 @@ private:
 	PixelShader* m_ps;
 	ConstantBuffer* m_cb;
 
-	unsigned long m_old_time = 0;
-	float m_delta_time = 0;
+	//unsigned long m_old_time = 0;
+	//float m_delta_time = 0;
 	float m_angle = 0;
 };

@@ -1,7 +1,7 @@
 #pragma once
+#include "EngineTime.h"
+
 #include <Windows.h>
-
-
 
 class Window
 {
