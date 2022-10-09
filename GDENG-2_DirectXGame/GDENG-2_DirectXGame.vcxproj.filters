@@ -46,6 +46,12 @@
     <Filter Include="GameEngine\GameObject\Quad">
       <UniqueIdentifier>{15c570ee-864c-420e-9a00-86bf0a94b3ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Math">
+      <UniqueIdentifier>{b6618e23-0fad-41ec-b76a-c13131ac2974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Camera">
+      <UniqueIdentifier>{5c3092f0-7b55-4a48-8509-7577fbce93cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -90,6 +96,9 @@
     <ClCompile Include="Quad.cpp">
       <Filter>GameEngine\GameObject\Quad</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>GameEngine\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -130,6 +139,18 @@
     </ClInclude>
     <ClInclude Include="Quad.h">
       <Filter>GameEngine\GameObject\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3D.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4x4.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>GameEngine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4D.h">
+      <Filter>GameEngine\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

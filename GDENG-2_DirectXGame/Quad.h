@@ -5,31 +5,30 @@
 #include "EngineTime.h"
 #include "VertexBuffer.h"
 #include "ConstantBuffer.h"
-
-struct vec3
-{
-	float x, y, z;
-};
+#include "Vector3D.h"
 
 // For one position and color only
 //struct vertex
 //{
-//	vec3 position;
-//	vec3 color;
+//	Vector3D position;
+//	Vector3D color;
 //};
 
 // For two positions and colors, animations
 struct vertex
 {
-	vec3 position;
-	vec3 position1;
-	vec3 color;
-	vec3 color1;
+	Vector3D position;
+	//Vector3D position1;
+	Vector3D color;
+	Vector3D color1;
 };
 
 __declspec(align(16))
 struct constant
 {
+	Matrix4x4 m_world;
+	Matrix4x4 m_view;
+	Matrix4x4 m_proj;
 	float m_angle;
 };
 
@@ -40,9 +39,13 @@ public:
 	void destroyObject() override;
 
 	void setAnimSpeed(float minSpeed, float maxSpeed);
-	void drawObject(VertexShader* vertex_shader, PixelShader* pixel_shader) override;
+	void drawObject(VertexShader* vertex_shader, PixelShader* pixel_shader, RECT client_rect) override;
 
 private:
+	void updateObject(RECT client_rect) override;
+	void updateObjectPosition() override;
+	void updateObjectScale() override;
+
 	VertexBuffer* vertex_buffer;
 	ConstantBuffer* constant_buffer;
 
@@ -50,4 +53,8 @@ private:
 
 	float decAnimSpeed = 0.0f;
 	float incAnimSpeed = 0.0f;
+
+	Matrix4x4 matrix;
+	float deltaPosition;
+	float deltaScale;
 };

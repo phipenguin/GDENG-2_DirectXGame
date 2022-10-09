@@ -1,6 +1,8 @@
 ﻿  Quad.cpp
 C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(60,43): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(70,43): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(85,30): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(87,30): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(100,30): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(102,30): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(109,46): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(118,43): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
   GDENG-2_DirectXGame.vcxproj -> C:\Users\Admin\source\repos\GDENG-2_DirectXGame\Debug\GDENG-2_DirectXGame.exe

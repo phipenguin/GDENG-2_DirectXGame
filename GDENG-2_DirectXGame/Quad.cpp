@@ -9,12 +9,12 @@ void Quad::initializeObject(int num, void* shader_byte_code, size_t size_shader)
 
 	vertex list1[] =
 	{
-		//X - Y - Z
 		//Quadrilateral
-		{-0.3f,-0.1f,0.0f,		-0.7f,-0.9f, 0.0f,		0.4f,1.0f,0.5f,		1.0f,0.4f,0.7f }, // POS1
-		{-0.1f, 0.8f,0.0f,		-0.9f, 0.1f, 0.0f,		0.4f,1.0f,0.5f,		1.0f,0.4f,0.7f }, // POS2
-		{ 0.1f,-0.6f,0.0f,		 1.0f,-0.2f, 0.0f,		0.4f,1.0f,0.5f,		1.0f,0.4f,0.7f }, // POS3
-		{ 0.8f, 0.8f,0.0f,		-0.7f,-0.9f, 0.0f,		0.4f,1.0f,0.5f,		1.0f,0.4f,0.7f }  // POS4
+		//POSITION1						COLOR1							COLOR2
+		{Vector3D(-0.5f,-0.5f, 0.0f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)}, // POS1
+		{Vector3D(-0.5f, 0.5f, 0.0f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)}, // POS2
+		{Vector3D( 0.5f,-0.5f, 0.0f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)}, // POS3
+		{Vector3D( 0.5f, 0.5f, 0.0f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)}  // POS4
 	};
 
 	/*vertex list2[] =
@@ -77,18 +77,55 @@ void Quad::setAnimSpeed(float minSpeed, float maxSpeed)
 	}
 }
 
-void Quad::drawObject(VertexShader* vertex_shader, PixelShader* pixel_shader)
+void Quad::updateObject(RECT client_rect)
 {
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
+	
+	cc.m_world.setIdentity();
+
+	updateObjectPosition();
+	updateObjectScale();
+
+	cc.m_view.setIdentity();
+	cc.m_proj.setOrthoLH
+	(
+		(client_rect.right - client_rect.left) / 200.0f,
+		(client_rect.bottom - client_rect.top) / 200.0f,
+		-4.0f,
+		4.0f
+	);
 
 	if (incAnimSpeed == 69)
 		cc.m_angle += decAnimSpeed * EngineTime::getDeltaTime();
 	else if (decAnimSpeed == 0)
 		cc.m_angle += incAnimSpeed * EngineTime::getDeltaTime();
 
-	std::cout << "Animation Speed: " << cc.m_angle << std::endl;
-
 	constant_buffer->update(graphicsEngine->getImmediateDeviceContext(), &cc);
+}
+
+void Quad::updateObjectPosition()
+{
+	deltaPosition += EngineTime::getDeltaTime() / 1.0f;
+
+	matrix.setTranslation(Vector3D::lerp(Vector3D(-1.5f, -1.5f, 0), Vector3D(1.5f, 1.5f, 0), (sin(deltaPosition) + 1.0f) / 2.0f));
+
+	cc.m_world *= matrix;
+}
+
+void Quad::updateObjectScale()
+{
+	deltaScale += EngineTime::getDeltaTime() / 1.0f;
+
+	matrix.setScale(Vector3D::lerp(Vector3D(0.5f, 0.5f, 0), Vector3D(1.0f, 1.0f, 0), (sin(deltaScale) + 1.0f) / 2.0f));
+
+	cc.m_world *= matrix;
+}
+
+void Quad::drawObject(VertexShader* vertex_shader, PixelShader* pixel_shader, RECT client_rect)
+{
+	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
+
+	updateObject(client_rect);
 
 	graphicsEngine->getImmediateDeviceContext()->setConstantBuffer(vertex_shader, constant_buffer);
 	graphicsEngine->getImmediateDeviceContext()->setConstantBuffer(pixel_shader, constant_buffer);

@@ -11,7 +11,7 @@ public:
 	static RenderSystem* getInstance();
 
 	void initializeQuads(int num, void* shader_byte_code, size_t size_shader);
-	void drawQuads(VertexShader* vertex_shader, PixelShader* pixel_shader);
+	void drawQuads(VertexShader* vertex_shader, PixelShader* pixel_shader, RECT client_rect);
 
 private:
 	RenderSystem();

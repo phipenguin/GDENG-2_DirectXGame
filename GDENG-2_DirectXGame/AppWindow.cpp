@@ -1,17 +1,13 @@
 #include "AppWindow.h"
+#include "Vector3D.h"
 #include <Windows.h>
-
-//struct vec3
-//{
-//	float x, y, z;
-//};
 
 //struct vertex
 //{
-//	vec3 position;
-//	vec3 position1;
-//	vec3 color;
-//	vec3 color1;
+//	Vector3D position;
+//	Vector3D position1;
+//	Vector3D color;
+//	Vector3D color1;
 //};
 
 //__declspec(align(16))
@@ -69,7 +65,7 @@ void AppWindow::onUpdate()
 	//constant cc;
 	//cc.m_angle = m_angle;
 
-	renderSystem->drawQuads(m_vs, m_ps);
+	renderSystem->drawQuads(m_vs, m_ps, rc);
 
 	//m_cb->update(graphicsEngine->getImmediateDeviceContext(), &cc);
 

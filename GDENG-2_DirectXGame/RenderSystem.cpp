@@ -27,13 +27,13 @@ void RenderSystem::initializeQuads(int num, void* shader_byte_code, size_t size_
     } 
 }
 
-void RenderSystem::drawQuads(VertexShader* vertex_shader, PixelShader* pixel_shader)
+void RenderSystem::drawQuads(VertexShader* vertex_shader, PixelShader* pixel_shader, RECT client_rect)
 {
     //Iterate through the list of quads
     for (auto const& i : quadsList)
     {
         i->setAnimSpeed(1.57f, 10.0f);
-        i->drawObject(vertex_shader, pixel_shader);
+        i->drawObject(vertex_shader, pixel_shader, client_rect);
     }
 }
 
