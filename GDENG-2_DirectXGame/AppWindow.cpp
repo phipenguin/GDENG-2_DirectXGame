@@ -65,7 +65,8 @@ void AppWindow::onUpdate()
 	//constant cc;
 	//cc.m_angle = m_angle;
 
-	renderSystem->drawQuads(m_vs, m_ps, rc);
+	//renderSystem->drawQuads(m_vs, m_ps, rc);
+	renderSystem->drawCubes(m_vs, m_ps, rc);
 
 	//m_cb->update(graphicsEngine->getImmediateDeviceContext(), &cc);
 
@@ -132,9 +133,11 @@ void AppWindow::createGraphicsWindow()
 	graphicsEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 	m_vs = graphicsEngine->createVertexShader(shader_byte_code, size_shader);
 
-	renderSystem->initializeQuads(1, shader_byte_code, size_shader);
+	//renderSystem->initializeQuads(1, shader_byte_code, size_shader);
 	//renderSystem->initializeQuads(2, shader_byte_code, size_shader);
 	//renderSystem->initializeQuads(3, shader_byte_code, size_shader);
+	
+	renderSystem->initializeCubes(1, shader_byte_code, size_shader);
 	//m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
 
 	graphicsEngine->releaseCompiledShader();

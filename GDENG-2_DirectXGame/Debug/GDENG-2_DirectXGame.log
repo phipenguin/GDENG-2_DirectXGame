@@ -1,25 +1,16 @@
-﻿  Quad.cpp
+﻿  Cube.cpp
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(39,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(40,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(41,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(42,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(43,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(44,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(45,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(47,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(48,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(49,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(50,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(51,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(52,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(53,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(55,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(56,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(57,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(58,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(59,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(60,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(61,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(105,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(106,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(107,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(108,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(138,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(60,43): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(70,43): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(99,30): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(101,30): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(108,46): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Quad.cpp(118,43): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Cube.cpp(110,22): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Cube.cpp(142,43): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
   GDENG-2_DirectXGame.vcxproj -> C:\Users\Admin\source\repos\GDENG-2_DirectXGame\Debug\GDENG-2_DirectXGame.exe

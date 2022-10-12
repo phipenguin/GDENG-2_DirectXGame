@@ -19,7 +19,7 @@ public:
 	SwapChain* createSwapChain();
 	DeviceContext* getImmediateDeviceContext();
 	VertexBuffer* createVertexBuffer();
-	IndexBuffer* createIndexBuufer();
+	IndexBuffer* createIndexBuffer();
 	ConstantBuffer* createConstantBuffer();
 	VertexShader* createVertexShader(void* shader_byte_code, size_t byte_code_size);
 	PixelShader* createPixelShader(void* shader_byte_code, size_t byte_code_size);

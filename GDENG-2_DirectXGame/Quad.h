@@ -7,7 +7,7 @@
 #include "ConstantBuffer.h"
 #include "Vector3D.h"
 
-struct vertex
+struct quadvertex
 {
 	Vector3D position;
 	Vector3D color;
@@ -15,7 +15,7 @@ struct vertex
 };
 
 __declspec(align(16))
-struct constant
+struct quadconstant
 {
 	Matrix4x4 m_world;
 	Matrix4x4 m_view;
@@ -40,7 +40,7 @@ private:
 	VertexBuffer* vertex_buffer;
 	ConstantBuffer* constant_buffer;
 
-	constant cc;
+	quadconstant cc;
 
 	//float decAnimSpeed = 0.0f;
 	//float incAnimSpeed = 0.0f;

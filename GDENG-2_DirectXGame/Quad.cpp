@@ -7,7 +7,7 @@ void Quad::initializeObject(int num, void* shader_byte_code, size_t size_shader)
 	AGameObject::initializeObject(num, shader_byte_code, size_shader);
 	vertex_buffer = GraphicsEngine::getInstance()->createVertexBuffer();
 
-	vertex list1[] =
+	quadvertex list1[] =
 	{
 		//Quadrilateral
 		//POSITION1						COLOR1							COLOR2
@@ -36,7 +36,7 @@ void Quad::initializeObject(int num, void* shader_byte_code, size_t size_shader)
 	UINT size_list = ARRAYSIZE(list1);
 
 	//if (num == 1)
-	vertex_buffer->load(list1, sizeof(vertex), size_list, shader_byte_code, size_shader);
+	vertex_buffer->load(list1, sizeof(quadvertex), size_list, shader_byte_code, size_shader);
 	//else if (num == 2)
 	//	vertex_buffer->load(list2, sizeof(vertex), size_list, shader_byte_code, size_shader);
 	//else if (num == 3)
@@ -45,11 +45,13 @@ void Quad::initializeObject(int num, void* shader_byte_code, size_t size_shader)
 	cc.m_angle = 0;
 
 	constant_buffer = GraphicsEngine::getInstance()->createConstantBuffer();
-	constant_buffer->load(&cc, sizeof(constant));
+	constant_buffer->load(&cc, sizeof(quadconstant));
 }
 
 void Quad::destroyObject()
 {
+	vertex_buffer->release();
+	constant_buffer->release();
 	AGameObject::destroyObject();
 }
 
@@ -77,6 +79,27 @@ void Quad::destroyObject()
 //	}
 //}
 
+void Quad::drawObject(VertexShader* vertex_shader, PixelShader* pixel_shader, RECT client_rect)
+{
+	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
+
+	updateObject(client_rect);
+
+	graphicsEngine->getImmediateDeviceContext()->setConstantBuffer(vertex_shader, constant_buffer);
+	graphicsEngine->getImmediateDeviceContext()->setConstantBuffer(pixel_shader, constant_buffer);
+
+	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
+	graphicsEngine->getImmediateDeviceContext()->setVertexShader(vertex_shader);
+	graphicsEngine->getImmediateDeviceContext()->setPixelShader(pixel_shader);
+
+
+	//SET THE VERTICES OF THE TRIANGLE TO DRAW
+	graphicsEngine->getImmediateDeviceContext()->setVertexBuffer(vertex_buffer);
+
+	// FINALLY DRAW THE TRIANGLE
+	graphicsEngine->getImmediateDeviceContext()->drawTriangleStrip(vertex_buffer->getSizeVertexList(), 0);
+}
+
 void Quad::updateObject(RECT client_rect)
 {
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
@@ -89,12 +112,13 @@ void Quad::updateObject(RECT client_rect)
 	cc.m_view.setIdentity();
 	cc.m_proj.setOrthoLH
 	(
-		(client_rect.right - client_rect.left) / 200.0f,
-		(client_rect.bottom - client_rect.top) / 200.0f,
+		(client_rect.right - client_rect.left) / 400.0f,
+		(client_rect.bottom - client_rect.top) / 400.0f,
 		-4.0f,
 		4.0f
 	);
 
+	cc.m_angle += 1.57f * EngineTime::getDeltaTime();
 	//if (incAnimSpeed == 69)
 	//	cc.m_angle += decAnimSpeed * EngineTime::getDeltaTime();
 	//else if (decAnimSpeed == 0)
@@ -121,25 +145,4 @@ void Quad::updateObjectScale()
 	//matrix.setScale(Vector3D::lerp(Vector3D(0.5f, 0.5f, 0), Vector3D(1.0f, 1.0f, 0), (sin(deltaScale) + 1.0f) / 2.0f));
 
 	cc.m_world *= matrix;
-}
-
-void Quad::drawObject(VertexShader* vertex_shader, PixelShader* pixel_shader, RECT client_rect)
-{
-	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
-
-	updateObject(client_rect);
-
-	graphicsEngine->getImmediateDeviceContext()->setConstantBuffer(vertex_shader, constant_buffer);
-	graphicsEngine->getImmediateDeviceContext()->setConstantBuffer(pixel_shader, constant_buffer);
-
-	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
-	graphicsEngine->getImmediateDeviceContext()->setVertexShader(vertex_shader);
-	graphicsEngine->getImmediateDeviceContext()->setPixelShader(pixel_shader);
-
-
-	//SET THE VERTICES OF THE TRIANGLE TO DRAW
-	graphicsEngine->getImmediateDeviceContext()->setVertexBuffer(vertex_buffer);
-
-	// FINALLY DRAW THE TRIANGLE
-	graphicsEngine->getImmediateDeviceContext()->drawTriangleStrip(vertex_buffer->getSizeVertexList(), 0);
 }

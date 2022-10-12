@@ -113,7 +113,7 @@ VertexBuffer* GraphicsEngine::createVertexBuffer()
 	return new VertexBuffer();
 }
 
-IndexBuffer* GraphicsEngine::createIndexBuufer()
+IndexBuffer* GraphicsEngine::createIndexBuffer()
 {
 	return new IndexBuffer();
 }
