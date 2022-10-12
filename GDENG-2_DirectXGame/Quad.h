@@ -7,18 +7,9 @@
 #include "ConstantBuffer.h"
 #include "Vector3D.h"
 
-// For one position and color only
-//struct vertex
-//{
-//	Vector3D position;
-//	Vector3D color;
-//};
-
-// For two positions and colors, animations
 struct vertex
 {
 	Vector3D position;
-	//Vector3D position1;
 	Vector3D color;
 	Vector3D color1;
 };
@@ -38,7 +29,7 @@ public:
 	void initializeObject(int num, void* shader_byte_code, size_t size_shader) override;
 	void destroyObject() override;
 
-	void setAnimSpeed(float minSpeed, float maxSpeed);
+	//void setAnimSpeed(float minSpeed, float maxSpeed);
 	void drawObject(VertexShader* vertex_shader, PixelShader* pixel_shader, RECT client_rect) override;
 
 private:
@@ -51,8 +42,8 @@ private:
 
 	constant cc;
 
-	float decAnimSpeed = 0.0f;
-	float incAnimSpeed = 0.0f;
+	//float decAnimSpeed = 0.0f;
+	//float incAnimSpeed = 0.0f;
 
 	Matrix4x4 matrix;
 	float deltaPosition;

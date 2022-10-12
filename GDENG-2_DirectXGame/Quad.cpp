@@ -53,29 +53,29 @@ void Quad::destroyObject()
 	AGameObject::destroyObject();
 }
 
-void Quad::setAnimSpeed(float minSpeed, float maxSpeed)
-{
-	if (incAnimSpeed < minSpeed || incAnimSpeed < maxSpeed) 
-	{
-		incAnimSpeed += EngineTime::getDeltaTime();
-
-		if (incAnimSpeed >= maxSpeed)
-		{
-			decAnimSpeed = incAnimSpeed;
-			incAnimSpeed = 69;
-		}
-	}
-	else if (decAnimSpeed >= maxSpeed || decAnimSpeed > minSpeed)
-	{
-		decAnimSpeed -= EngineTime::getDeltaTime();
-
-		if (decAnimSpeed < minSpeed) 
-		{
-			incAnimSpeed = decAnimSpeed;
-			decAnimSpeed = 0;
-		}
-	}
-}
+//void Quad::setAnimSpeed(float minSpeed, float maxSpeed)
+//{
+//	if (incAnimSpeed < minSpeed || incAnimSpeed < maxSpeed) 
+//	{
+//		incAnimSpeed += EngineTime::getDeltaTime();
+//
+//		if (incAnimSpeed >= maxSpeed)
+//		{
+//			decAnimSpeed = incAnimSpeed;
+//			incAnimSpeed = 69;
+//		}
+//	}
+//	else if (decAnimSpeed >= maxSpeed || decAnimSpeed > minSpeed)
+//	{
+//		decAnimSpeed -= EngineTime::getDeltaTime();
+//
+//		if (decAnimSpeed < minSpeed) 
+//		{
+//			incAnimSpeed = decAnimSpeed;
+//			decAnimSpeed = 0;
+//		}
+//	}
+//}
 
 void Quad::updateObject(RECT client_rect)
 {
@@ -95,10 +95,10 @@ void Quad::updateObject(RECT client_rect)
 		4.0f
 	);
 
-	if (incAnimSpeed == 69)
-		cc.m_angle += decAnimSpeed * EngineTime::getDeltaTime();
-	else if (decAnimSpeed == 0)
-		cc.m_angle += incAnimSpeed * EngineTime::getDeltaTime();
+	//if (incAnimSpeed == 69)
+	//	cc.m_angle += decAnimSpeed * EngineTime::getDeltaTime();
+	//else if (decAnimSpeed == 0)
+	//	cc.m_angle += incAnimSpeed * EngineTime::getDeltaTime();
 
 	constant_buffer->update(graphicsEngine->getImmediateDeviceContext(), &cc);
 }
@@ -107,7 +107,8 @@ void Quad::updateObjectPosition()
 {
 	deltaPosition += EngineTime::getDeltaTime() / 1.0f;
 
-	matrix.setTranslation(Vector3D::lerp(Vector3D(-1.5f, -1.5f, 0), Vector3D(1.5f, 1.5f, 0), (sin(deltaPosition) + 1.0f) / 2.0f));
+	matrix.setTranslation(Vector3D(0, 0, 0));
+	//matrix.setTranslation(Vector3D::lerp(Vector3D(-1.5f, -1.5f, 0), Vector3D(1.5f, 1.5f, 0), (sin(deltaPosition) + 1.0f) / 2.0f));
 
 	cc.m_world *= matrix;
 }
@@ -116,7 +117,8 @@ void Quad::updateObjectScale()
 {
 	deltaScale += EngineTime::getDeltaTime() / 1.0f;
 
-	matrix.setScale(Vector3D::lerp(Vector3D(0.5f, 0.5f, 0), Vector3D(1.0f, 1.0f, 0), (sin(deltaScale) + 1.0f) / 2.0f));
+	matrix.setScale(Vector3D(1.0f, 1.0f, 0));
+	//matrix.setScale(Vector3D::lerp(Vector3D(0.5f, 0.5f, 0), Vector3D(1.0f, 1.0f, 0), (sin(deltaScale) + 1.0f) / 2.0f));
 
 	cc.m_world *= matrix;
 }
