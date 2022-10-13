@@ -1,30 +1,58 @@
 #include "AGameObject.h"
 
-void AGameObject::initializeObject(int num, void* shader_byte_code, size_t size_shader)
+AGameObject::AGameObject(string name)
+{
+	this->name = name;
+	this->localPosition = Vector3D::setToZero();
+	this->localRotation = Vector3D::setToZero();
+	this->localScale = Vector3D::setToOne();
+}
+
+AGameObject::~AGameObject()
 {
 }
 
-void AGameObject::initializeConstantBuffer()
+void AGameObject::setPosition(float x, float y, float z)
 {
+	this->localPosition = Vector3D(x, y, z);
 }
 
-void AGameObject::destroyObject()
+void AGameObject::setPosition(Vector3D pos)
 {
-	delete this;
+	this->localPosition = pos;
 }
 
-void AGameObject::updateObject(RECT client_rect)
+Vector3D AGameObject::getLocalPosition()
 {
+	return localPosition;
 }
 
-void AGameObject::updateObjectPosition()
+void AGameObject::setScale(float x, float y, float z)
 {
+	this->localScale = Vector3D(x, y, z);
 }
 
-void AGameObject::updateObjectScale()
+void AGameObject::setScale(Vector3D scale)
 {
+	this->localScale = scale;
 }
 
-void AGameObject::drawObject(VertexShader* vertex_shader, PixelShader* pixel_shader, RECT client_rect)
+Vector3D AGameObject::getLocalScale()
 {
+	return localScale;
+}
+
+void AGameObject::setRotation(float x, float y, float z)
+{
+	this->localRotation = Vector3D(x, y, z);
+}
+
+void AGameObject::setRotation(Vector3D rot)
+{
+	this->localRotation = rot;
+}
+
+Vector3D AGameObject::getLocalRotation()
+{
+	return localRotation;
 }

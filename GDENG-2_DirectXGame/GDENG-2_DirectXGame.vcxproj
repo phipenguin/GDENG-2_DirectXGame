@@ -29,7 +29,7 @@
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PixelShader.cpp" />
-    <ClCompile Include="Quad.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
@@ -47,7 +47,7 @@
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="PixelShader.h" />
-    <ClInclude Include="Quad.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="SwapChain.h" />
     <ClInclude Include="Vector3D.h" />

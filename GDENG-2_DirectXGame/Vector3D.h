@@ -12,6 +12,24 @@ public:
 	{
 	}
 
+	static Vector3D setToZero()
+	{
+		Vector3D v;
+		v.m_x = 0.0f;
+		v.m_y = 0.0f;
+		v.m_z = 0.0f;
+		return v;
+	}
+
+	static Vector3D setToOne()
+	{
+		Vector3D v;
+		v.m_x = 1.0f;
+		v.m_y = 1.0f;
+		v.m_z = 1.0f;
+		return v;
+	}
+
 	static Vector3D lerp(const Vector3D& start, const Vector3D& end, float delta)
 	{
 		Vector3D v;

@@ -1,30 +1,41 @@
 #include "Cube.h"
+#include "GraphicsEngine.h"
+#include "DeviceContext.h"
+#include <iostream>
 
-void Cube::initializeObject(int num, void* shader_byte_code, size_t size_shader)
+Cube::Cube(string name, void* shader_byte_code, size_t size_shader) : AGameObject(name)
 {
-	AGameObject::initializeObject(num, shader_byte_code, size_shader);
-	vertex_buffer = GraphicsEngine::getInstance()->createVertexBuffer();
-	index_buffer = GraphicsEngine::getInstance()->createIndexBuffer();
-
-	cubevertex vextex_list[] =
+	Vertex vextex_list[] =
 	{
-		//Cuboid
-		//FRONT FACE
 		//POSITION						COLOR1							COLOR2
-		{Vector3D(-0.5f,-0.5f,-0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
-		{Vector3D(-0.5f, 0.5f,-0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
-		{Vector3D( 0.5f, 0.5f,-0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
-		{Vector3D( 0.5f,-0.5f,-0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
+		//FRONT FACE
+		{Vector3D(-0.5f,-0.5f,-0.5f),	Vector3D( 1.0f, 0.0f, 0.0f),	Vector3D( 0.2f, 0.0f, 0.0f)},
+		{Vector3D(-0.5f, 0.5f,-0.5f),	Vector3D( 1.0f, 1.0f, 0.0f),	Vector3D( 0.2f, 0.2f, 0.0f)},
+		{Vector3D( 0.5f, 0.5f,-0.5f),	Vector3D( 1.0f, 1.0f, 0.0f),	Vector3D( 0.2f, 0.2f, 0.0f)},
+		{Vector3D( 0.5f,-0.5f,-0.5f),	Vector3D( 1.0f, 0.0f, 0.0f),	Vector3D( 0.2f, 0.0f, 0.0f)},
 
 		//BACK FACE
-		{Vector3D( 0.5f,-0.5f, 0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
-		{Vector3D( 0.5f, 0.5f, 0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
-		{Vector3D(-0.5f, 0.5f, 0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
-		{Vector3D(-0.5f,-0.5f, 0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)}
+		{Vector3D( 0.5f,-0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 0.0f),	Vector3D( 0.0f, 0.2f, 0.0f)},
+		{Vector3D( 0.5f, 0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 1.0f),	Vector3D( 0.0f, 0.2f, 0.2f)},
+		{Vector3D(-0.5f, 0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 1.0f),	Vector3D( 0.0f, 0.2f, 0.2f)},
+		{Vector3D(-0.5f,-0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 0.0f),	Vector3D( 0.0f, 0.2f, 0.0f)}
+
+		//POSITION						COLOR1							COLOR2
+		//FRONT FACE
+		//{Vector3D(-0.5f,-0.5f,-0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
+		//{Vector3D(-0.5f, 0.5f,-0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
+		//{Vector3D( 0.5f, 0.5f,-0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
+		//{Vector3D( 0.5f,-0.5f,-0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
+
+		////BACK FACE
+		//{Vector3D( 0.5f,-0.5f, 0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
+		//{Vector3D( 0.5f, 0.5f, 0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
+		//{Vector3D(-0.5f, 0.5f, 0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
+		//{Vector3D(-0.5f,-0.5f, 0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)}
 	};
 
-	UINT size_vertex_list = ARRAYSIZE(vextex_list);
-	vertex_buffer->load(vextex_list, sizeof(cubevertex), size_vertex_list, shader_byte_code, size_shader);
+	vertex_buffer = GraphicsEngine::getInstance()->createVertexBuffer();
+	vertex_buffer->load(vextex_list, sizeof(Vertex), ARRAYSIZE(vextex_list), shader_byte_code, size_shader);
 
 	unsigned int index_list[]=
 	{
@@ -48,101 +59,127 @@ void Cube::initializeObject(int num, void* shader_byte_code, size_t size_shader)
 		1,0,7
 	};
 
-	UINT size_index_list = ARRAYSIZE(index_list);
-	index_buffer->load(index_list, size_index_list);
+	index_buffer = GraphicsEngine::getInstance()->createIndexBuffer();
+	index_buffer->load(index_list, ARRAYSIZE(index_list));
 
-	cc.m_angle = 0;
+	CBData cbData = {};
+	cbData.time = 0;
 
 	constant_buffer = GraphicsEngine::getInstance()->createConstantBuffer();
-	constant_buffer->load(&cc, sizeof(cubeconstant));
+	constant_buffer->load(&cbData, sizeof(CBData));
 }
 
-void Cube::destroyObject()
+Cube::~Cube()
 {
 	vertex_buffer->release();
 	index_buffer->release();
-	constant_buffer->release();
-	AGameObject::destroyObject();
+	AGameObject::~AGameObject();
 }
 
-void Cube::drawObject(VertexShader* vertex_shader, PixelShader* pixel_shader, RECT client_rect)
+void Cube::update(float deltaTime)
+{
+	this->deltaTime = deltaTime;
+
+	this->ticks += deltaTime;
+
+	//float rotSpeed = this->ticks * this->speed;
+	//this->setRotation(rotSpeed, rotSpeed, rotSpeed);
+
+
+	if (incAnimSpeed < 1.57f || incAnimSpeed < 10.0f) 
+	{
+		incAnimSpeed += deltaTime;
+
+		if (incAnimSpeed >= 10.0f)
+		{
+			decAnimSpeed = incAnimSpeed;
+			incAnimSpeed = 69;
+		}
+	}
+	else if (decAnimSpeed >= 10.0f || decAnimSpeed > 1.57f)
+	{
+		decAnimSpeed -= deltaTime;
+
+		if (decAnimSpeed < 1.57f) 
+		{
+			incAnimSpeed = decAnimSpeed;
+			decAnimSpeed = 0;
+		}
+	}
+}
+
+void Cube::draw(int width, int height, VertexShader* vertex_shader, PixelShader* pixel_shader)
 {
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
+	DeviceContext* deviceContext = graphicsEngine->getImmediateDeviceContext();
 
-	updateObject(client_rect);
+	CBData cbData = {};
+	cbData.time = this->ticks * speed;
 
-	graphicsEngine->getImmediateDeviceContext()->setConstantBuffer(vertex_shader, constant_buffer);
-	graphicsEngine->getImmediateDeviceContext()->setConstantBuffer(pixel_shader, constant_buffer);
+	if (incAnimSpeed == 69)
+	{
+		float rotSpeed = 0.0f;
+		rotSpeed += decAnimSpeed * speed;
+		this->setRotation(rotSpeed, rotSpeed, rotSpeed);
+	}	
+	else if (decAnimSpeed == 0)
+	{
+		float rotSpeed = 0.0f;
+		rotSpeed += incAnimSpeed * speed;
+		this->setRotation(rotSpeed, rotSpeed, rotSpeed);
+	}
+
+	if (this->deltaPosition > 1.0f)
+	{
+		this->deltaPosition = 0.0f;
+	}
+	else
+	{
+		this->deltaPosition += this->deltaTime * 0.1f;
+	}
+
+	Matrix4x4 allMatrix; allMatrix.setIdentity();
+	Matrix4x4 translationMatrix; translationMatrix.setTranslation(this->getLocalPosition());
+	Matrix4x4 scaleMatrix; scaleMatrix.setScale(this->getLocalScale());
+	Vector3D rotation = this->getLocalRotation();
+	Matrix4x4 zMatrix; zMatrix.setRotationZ(rotation.m_z);
+	Matrix4x4 xMatrix; xMatrix.setRotationX(rotation.m_x);
+	Matrix4x4 yMatrix; yMatrix.setRotationY(rotation.m_y);
+
+	//Scale -> Rotate -> Transform
+	Matrix4x4 rotMatrix; rotMatrix.setIdentity();
+	rotMatrix *= xMatrix;
+	rotMatrix *= yMatrix;
+	rotMatrix *= zMatrix;
+
+	allMatrix *= scaleMatrix;
+	allMatrix *= rotMatrix;
+	allMatrix *= translationMatrix;
+
+	cbData.worldMatrix = allMatrix;
+
+	cbData.viewMatrix.setIdentity();
+	cbData.projMatrix.setOrthoLH(width / 400.0f, height / 400.0f, -4.0f, 4.0f);
+
+	constant_buffer->update(deviceContext, &cbData);
+
+	deviceContext->setConstantBuffer(vertex_shader, this->constant_buffer);
+	deviceContext->setConstantBuffer(pixel_shader, this->constant_buffer);
 
 	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
-	graphicsEngine->getImmediateDeviceContext()->setVertexShader(vertex_shader);
-	graphicsEngine->getImmediateDeviceContext()->setPixelShader(pixel_shader);
-
+	deviceContext->setVertexShader(vertex_shader);
+	deviceContext->setPixelShader(pixel_shader);
 
 	//SET THE VERTICES OF THE TRIANGLE TO DRAW
-	graphicsEngine->getImmediateDeviceContext()->setVertexBuffer(vertex_buffer);
+	deviceContext->setVertexBuffer(vertex_buffer);
 	//SET THE INDICES OF THE TRIANGLE TO DRAW
-	graphicsEngine->getImmediateDeviceContext()->setIndexBuffer(index_buffer);
+	deviceContext->setIndexBuffer(index_buffer);
 
 	// FINALLY DRAW THE TRIANGLE
-	graphicsEngine->getImmediateDeviceContext()->drawIndexedTriangleList(index_buffer->getSizeIndexList(), 0, 0);
+	deviceContext->drawIndexedTriangleList(index_buffer->getSizeIndexList(), 0, 0);
 }
 
-void Cube::updateObject(RECT client_rect)
+void Cube::setAnimationSpeed(float speed)
 {
-	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
-	
-	cc.m_world.setIdentity();
-
-	updateObjectPosition();
-	updateObjectScale();
-	updateObjectRotation();
-
-	cc.m_view.setIdentity();
-	cc.m_proj.setOrthoLH
-	(
-		(client_rect.right - client_rect.left) / 400.0f,
-		(client_rect.bottom - client_rect.top) / 400.0f,
-		-4.0f,
-		4.0f
-	);
-
-	cc.m_angle += 1.57f * EngineTime::getDeltaTime();
-
-	constant_buffer->update(graphicsEngine->getImmediateDeviceContext(), &cc);
-}
-
-void Cube::updateObjectPosition()
-{
-	//deltaPosition += EngineTime::getDeltaTime() / 1.0f;
-
-	matrix.setTranslation(Vector3D(0, 0, 0));
-	//matrix.setTranslation(Vector3D::lerp(Vector3D(-1.5f, -1.5f, 0), Vector3D(1.5f, 1.5f, 0), (sin(deltaPosition) + 1.0f) / 2.0f));
-
-	cc.m_world *= matrix;
-}
-
-void Cube::updateObjectRotation()
-{
-	matrix.setIdentity();
-	matrix.setRotationZ(deltaScale);
-	cc.m_world *= matrix;
-
-	matrix.setIdentity();
-	matrix.setRotationY(deltaScale);
-	cc.m_world *= matrix;
-
-	matrix.setIdentity();
-	matrix.setRotationX(deltaScale);
-	cc.m_world *= matrix;
-}
-
-void Cube::updateObjectScale()
-{
-	deltaScale += EngineTime::getDeltaTime() / 1.0f;
-
-	matrix.setScale(Vector3D(1.0f, 1.0f, 1.0f));
-	//matrix.setScale(Vector3D::lerp(Vector3D(0.5f, 0.5f, 0), Vector3D(1.0f, 1.0f, 0), (sin(deltaScale) + 1.0f) / 2.0f));
-
-	cc.m_world *= matrix;
+	this->speed = speed;
 }

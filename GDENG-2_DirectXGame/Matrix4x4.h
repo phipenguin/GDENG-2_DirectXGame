@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
 #include "Vector3D.h"
-
 class Matrix4x4
 {
 public:
@@ -36,6 +35,7 @@ public:
 
 	void setRotationX(float x)
 	{
+		setIdentity();
 		m_mat[1][1] = cos(x);
 		m_mat[1][2] = sin(x);
 		m_mat[2][1] = -sin(x);
@@ -44,6 +44,7 @@ public:
 
 	void setRotationY(float y)
 	{
+		setIdentity();
 		m_mat[0][0] = cos(y);
 		m_mat[0][2] = -sin(y);
 		m_mat[2][0] = sin(y);
@@ -52,6 +53,7 @@ public:
 
 	void setRotationZ(float z)
 	{
+		setIdentity();
 		m_mat[0][0] = cos(z);
 		m_mat[0][1] = sin(z);
 		m_mat[1][0] = -sin(z);
