@@ -55,6 +55,9 @@
     <Filter Include="GameEngine\GameObject\Plane">
       <UniqueIdentifier>{15c570ee-864c-420e-9a00-86bf0a94b3ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\AudioSystem">
+      <UniqueIdentifier>{b5ab9b11-9331-4d54-b359-6297c5a0abef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -104,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>GameEngine\GameObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSystem.cpp">
+      <Filter>GameEngine\AudioSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>GameEngine\GameObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSystem.h">
+      <Filter>GameEngine\AudioSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

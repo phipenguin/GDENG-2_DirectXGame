@@ -62,6 +62,7 @@ void AppWindow::onUpdate()
 	//// FINALLY DRAW THE TRIANGLE
 	//graphicsEngine->getImmediateDeviceContext()->drawTriangleStrip(m_vb->getSizeVertexList(), 0);
 	//GraphicsEngine::get()->getImmediateDeviceContext()->drawTriangleList(m_vb->getSizeVertexList(), 0);
+
 	m_swap_chain->present(true);
 }
 
@@ -82,9 +83,15 @@ void AppWindow::createGraphicsWindow()
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
 	RenderSystem* renderSystem = RenderSystem::getInstance();
 	m_swap_chain = graphicsEngine->createSwapChain();
+	
+	m_audio_system = new AudioSystem();
 
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
+
+	m_audio_system->init();
+	m_audio_system->loadAudioFile(L"the beggining.wav");
+	m_audio_system->playAudio();
 
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;

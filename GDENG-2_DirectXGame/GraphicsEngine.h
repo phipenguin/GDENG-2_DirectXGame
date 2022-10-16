@@ -60,6 +60,9 @@ private:
 	ID3D11VertexShader* m_vs = nullptr;
 	ID3D11PixelShader* m_ps = nullptr;
 private:
+
+
+private:
 	friend class SwapChain;
 	friend class VertexBuffer;
 	friend class IndexBuffer;
