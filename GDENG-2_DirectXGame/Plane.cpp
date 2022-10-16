@@ -2,49 +2,58 @@
 #include "GraphicsEngine.h"
 #include "DeviceContext.h"
 
-//void Quad::setAnimSpeed(float minSpeed, float maxSpeed)
-//{
-//	if (incAnimSpeed < minSpeed || incAnimSpeed < maxSpeed) 
-//	{
-//		incAnimSpeed += EngineTime::getDeltaTime();
-//
-//		if (incAnimSpeed >= maxSpeed)
-//		{
-//			decAnimSpeed = incAnimSpeed;
-//			incAnimSpeed = 69;
-//		}
-//	}
-//	else if (decAnimSpeed >= maxSpeed || decAnimSpeed > minSpeed)
-//	{
-//		decAnimSpeed -= EngineTime::getDeltaTime();
-//
-//		if (decAnimSpeed < minSpeed) 
-//		{
-//			incAnimSpeed = decAnimSpeed;
-//			decAnimSpeed = 0;
-//		}
-//	}
-//}
-
 Plane::Plane(string name, void* shader_byte_code, size_t size_shader) : AGameObject(name)
 {
 	Vertex vextex_list[] =
 	{
 		//POSITION						COLOR1							COLOR2
-		{Vector3D(-0.5f,-0.5f, 0.0f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
-		{Vector3D(-0.5f, 0.5f, 0.0f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
-		{Vector3D( 0.5f,-0.5f, 0.0f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)},
-		{Vector3D( 0.5f, 0.5f, 0.0f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)}
+		{Vector3D(-0.5f, 0.0f,-0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D(-0.5f, 0.0f,-0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D( 0.5f, 0.0f,-0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D( 0.5f, 0.0f,-0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+
+		//POSITION						COLOR1							COLOR2
+		{Vector3D(-0.5f, 0.0f, 0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D(-0.5f, 0.0f, 0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D( 0.5f, 0.0f, 0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D( 0.5f, 0.0f, 0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)}
 	};
 
 	vertex_buffer = GraphicsEngine::getInstance()->createVertexBuffer();
 	vertex_buffer->load(vextex_list, sizeof(Vertex), ARRAYSIZE(vextex_list), shader_byte_code, size_shader);
+
+	unsigned int index_list[]=
+	{
+		//FRONT SIDE
+		0,1,2,  //FIRST TRIANGLE
+		2,3,0,  //SECOND TRIANGLE
+		//BACK SIDE
+		4,5,6,
+		6,7,4,
+		//TOP SIDE
+		1,6,5,
+		5,2,1,
+		//BOTTOM SIDE
+		7,0,3,
+		3,4,7,
+		//RIGHT SIDE
+		3,2,5,
+		5,4,3,
+		//LEFT SIDE
+		7,6,1,
+		1,0,7
+	};
+
+	index_buffer = GraphicsEngine::getInstance()->createIndexBuffer();
+	index_buffer->load(index_list, ARRAYSIZE(index_list));
 
 	CBData cbData = {};
 	cbData.time = 0;
 
 	constant_buffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	constant_buffer->load(&cbData, sizeof(CBData));
+
+	this->setRotation(50.0f, 0.0f, 0.0f);
 }
 
 Plane::~Plane()
@@ -67,6 +76,7 @@ void Plane::draw(int width, int height, VertexShader* vertex_shader, PixelShader
 	DeviceContext* deviceContext = graphicsEngine->getImmediateDeviceContext();
 	
 	CBData cbData = {};
+	cbData.time = this->ticks;
 
 	if (this->deltaPosition > 1.0f)
 	{
@@ -77,15 +87,26 @@ void Plane::draw(int width, int height, VertexShader* vertex_shader, PixelShader
 		this->deltaPosition += this->deltaTime * 0.1f;
 	}
 
-	cbData.worldMatrix.setIdentity();
+	Matrix4x4 allMatrix; allMatrix.setIdentity();
+	Matrix4x4 translationMatrix; translationMatrix.setTranslation(this->getLocalPosition());
+	Matrix4x4 scaleMatrix; scaleMatrix.setScale(this->getLocalScale());
+	Vector3D rotation = this->getLocalRotation();
+	//Matrix4x4 zMatrix; zMatrix.setRotationZ(rotation.m_z);
+	Matrix4x4 xMatrix; xMatrix.setRotationX(rotation.m_x);
+	//Matrix4x4 yMatrix; yMatrix.setRotationY(rotation.m_y);
+
+	Matrix4x4 rotMatrix; rotMatrix.setIdentity();
+	rotMatrix *= xMatrix;
+	//rotMatrix *= yMatrix;
+	//rotMatrix *= zMatrix;
+
+	allMatrix *= scaleMatrix;
+	allMatrix *= rotMatrix;
+	allMatrix *= translationMatrix;
+
+	cbData.worldMatrix = allMatrix;
 	cbData.viewMatrix.setIdentity();
 	cbData.projMatrix.setOrthoLH(width / 400.0f, height / 400.0f, -4.0f, 4.0f);
-
-	//cc.m_angle += 1.57f * EngineTime::getDeltaTime();
-	//if (incAnimSpeed == 69)
-	//	cc.m_angle += decAnimSpeed * EngineTime::getDeltaTime();
-	//else if (decAnimSpeed == 0)
-	//	cc.m_angle += incAnimSpeed * EngineTime::getDeltaTime();
 
 	constant_buffer->update(graphicsEngine->getImmediateDeviceContext(), &cbData);
 
@@ -100,9 +121,11 @@ void Plane::draw(int width, int height, VertexShader* vertex_shader, PixelShader
 	deviceContext->setVertexBuffer(vertex_buffer);
 
 	// FINALLY DRAW THE TRIANGLE
-	deviceContext->drawTriangleStrip(vertex_buffer->getSizeVertexList(), 0);
+	//deviceContext->drawTriangleStrip(vertex_buffer->getSizeVertexList(), 0);
+	deviceContext->drawIndexedTriangleList(index_buffer->getSizeIndexList(), 0, 0);
 }
 
 void Plane::setAnimationSpeed(float speed)
 {
+	this->speed = speed;
 }

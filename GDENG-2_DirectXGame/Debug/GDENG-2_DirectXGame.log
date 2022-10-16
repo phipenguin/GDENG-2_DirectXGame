@@ -1,4 +1,4 @@
-﻿  Cube.cpp
+﻿  Plane.cpp
 C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(39,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(40,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(41,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data

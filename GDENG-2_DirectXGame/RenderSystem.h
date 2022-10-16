@@ -1,5 +1,5 @@
 #pragma once
-//#include "Quad.h"
+#include "Plane.h"
 #include "Cube.h"
 #include <list>
 
@@ -10,9 +10,9 @@ public:
 	static void destroy();
 	static RenderSystem* getInstance();
 	
-	//For Quads
-	//void initializeQuads(int num, void* shader_byte_code, size_t size_shader);
-	//void drawQuads(VertexShader* vertex_shader, PixelShader* pixel_shader, RECT client_rect);
+	//For Planes
+	void initializePlanes(void* shader_byte_code, size_t size_shader);
+	void drawPlanes(int width, int height, VertexShader* vertex_shader, PixelShader* pixel_shader);
 
 	//For Cubes
 	void initializeCubes(void* shader_byte_code, size_t size_shader);
@@ -26,6 +26,6 @@ private:
 
 	static RenderSystem* sharedInstance;
 
-	//std::list<Quad*> quadsList;
+	std::list<Plane*> planesList;
 	std::list<Cube*> cubesList;
 };

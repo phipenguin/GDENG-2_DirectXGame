@@ -82,30 +82,8 @@ void Cube::update(float deltaTime)
 
 	this->ticks += deltaTime;
 
-	//float rotSpeed = this->ticks * this->speed;
-	//this->setRotation(rotSpeed, rotSpeed, rotSpeed);
-
-
-	if (incAnimSpeed < 1.57f || incAnimSpeed < 10.0f) 
-	{
-		incAnimSpeed += deltaTime;
-
-		if (incAnimSpeed >= 10.0f)
-		{
-			decAnimSpeed = incAnimSpeed;
-			incAnimSpeed = 69;
-		}
-	}
-	else if (decAnimSpeed >= 10.0f || decAnimSpeed > 1.57f)
-	{
-		decAnimSpeed -= deltaTime;
-
-		if (decAnimSpeed < 1.57f) 
-		{
-			incAnimSpeed = decAnimSpeed;
-			decAnimSpeed = 0;
-		}
-	}
+	float rotSpeed = this->ticks * this->speed;
+	this->setRotation(rotSpeed, rotSpeed, rotSpeed);
 }
 
 void Cube::draw(int width, int height, VertexShader* vertex_shader, PixelShader* pixel_shader)
@@ -114,20 +92,7 @@ void Cube::draw(int width, int height, VertexShader* vertex_shader, PixelShader*
 	DeviceContext* deviceContext = graphicsEngine->getImmediateDeviceContext();
 
 	CBData cbData = {};
-	cbData.time = this->ticks * speed;
-
-	if (incAnimSpeed == 69)
-	{
-		float rotSpeed = 0.0f;
-		rotSpeed += decAnimSpeed * speed;
-		this->setRotation(rotSpeed, rotSpeed, rotSpeed);
-	}	
-	else if (decAnimSpeed == 0)
-	{
-		float rotSpeed = 0.0f;
-		rotSpeed += incAnimSpeed * speed;
-		this->setRotation(rotSpeed, rotSpeed, rotSpeed);
-	}
+	cbData.time = this->ticks;
 
 	if (this->deltaPosition > 1.0f)
 	{

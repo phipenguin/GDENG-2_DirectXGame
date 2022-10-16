@@ -47,6 +47,33 @@ bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 		return false;
 	}
 
+	D3D11_TEXTURE2D_DESC tex_desc = {};
+	tex_desc.Width = width;
+	tex_desc.Height = height;
+	tex_desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	tex_desc.Usage = D3D11_USAGE_DEFAULT;
+	tex_desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	tex_desc.MipLevels = 1;
+	tex_desc.SampleDesc.Count = 1;
+	tex_desc.SampleDesc.Quality = 0;
+	tex_desc.MiscFlags = 0;
+	tex_desc.ArraySize = 1;
+	tex_desc.CPUAccessFlags = 0;
+
+	HRESULT depthResult = device->CreateTexture2D(&tex_desc, NULL, &buffer);
+
+	if (FAILED(depthResult))
+	{
+		return false;
+	}
+
+	HRESULT depthStencilResult = device->CreateDepthStencilView(buffer, NULL, &this->m_dsv);
+
+	if (FAILED(depthStencilResult))
+	{
+		return false;
+	}
+
 	return true;
 }
 

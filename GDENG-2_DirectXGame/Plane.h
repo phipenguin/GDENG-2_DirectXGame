@@ -1,6 +1,7 @@
 #pragma once
 #include "AGameObject.h"
 #include "VertexBuffer.h"
+#include "IndexBuffer.h"
 #include "ConstantBuffer.h"
 
 class Plane : public AGameObject
@@ -16,6 +17,7 @@ public:
 
 private:
 	VertexBuffer* vertex_buffer;
+	IndexBuffer* index_buffer;
 	ConstantBuffer* constant_buffer;
 
 	float ticks = 0.0f;

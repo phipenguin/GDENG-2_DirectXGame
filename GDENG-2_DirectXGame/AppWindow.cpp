@@ -43,7 +43,7 @@ void AppWindow::onUpdate()
 	RECT rc = this->getClientWindowRect();
 	deviceContext->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-	//renderSystem->drawQuads(m_vs, m_ps, rc);
+	renderSystem->drawPlanes(rc.right - rc.left, rc.bottom - rc.top, m_vs, m_ps);
 	renderSystem->drawCubes(rc.right - rc.left, rc.bottom - rc.top, m_vs, m_ps);
 
 	//m_cb->update(graphicsEngine->getImmediateDeviceContext(), &cc);
@@ -96,6 +96,7 @@ void AppWindow::createGraphicsWindow()
 	//renderSystem->initializeQuads(2, shader_byte_code, size_shader);
 	//renderSystem->initializeQuads(3, shader_byte_code, size_shader);
 	
+	renderSystem->initializePlanes(shader_byte_code, size_shader);
 	renderSystem->initializeCubes(shader_byte_code, size_shader);
 
 	graphicsEngine->releaseCompiledShader();
