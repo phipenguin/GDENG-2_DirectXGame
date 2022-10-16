@@ -18,7 +18,7 @@ bool AudioSystem::init()
 	{
 		return false;
 	}
-	
+
 	if (FAILED(hr = m_audio_system->CreateMasteringVoice(&m_master_voice)))
 	{
 		return false;
@@ -37,14 +37,14 @@ bool AudioSystem::loadAudioFile(const wchar_t* file_name)
     NULL,
     OPEN_EXISTING,
     0,
-    NULL );
+    NULL);
 
     if(INVALID_HANDLE_VALUE == hFile)
     {
         return false;
     }
 
-    if(INVALID_SET_FILE_POINTER == SetFilePointer( hFile, 0, NULL, FILE_BEGIN))
+    if(INVALID_SET_FILE_POINTER == SetFilePointer(hFile, 0, NULL, FILE_BEGIN))
     {
         return false;
     }
@@ -52,7 +52,7 @@ bool AudioSystem::loadAudioFile(const wchar_t* file_name)
     DWORD dwChunkSize;
     DWORD dwChunkPosition;
     //check the file type, should be fourccWAVE or 'XWMA'
-    findChunk(hFile,fourccRIFF,dwChunkSize, dwChunkPosition );
+    findChunk(hFile,fourccRIFF,dwChunkSize, dwChunkPosition);
     DWORD filetype;
     readChunkData(hFile,&filetype,sizeof(DWORD),dwChunkPosition);
     if (filetype != fourccWAVE)
@@ -93,6 +93,16 @@ bool AudioSystem::playAudio()
     }
 
     return true;
+}
+
+void AudioSystem::setVolume(float volume)
+{
+    m_master_voice->SetVolume(volume / 100.0f);
+}
+
+void AudioSystem::setPitch(float pitch)
+{
+    m_source_voice->SetFrequencyRatio(pitch);
 }
 
 bool AudioSystem::release()

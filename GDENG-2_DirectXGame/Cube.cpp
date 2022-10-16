@@ -9,16 +9,16 @@ Cube::Cube(string name, void* shader_byte_code, size_t size_shader) : AGameObjec
 	{
 		//POSITION						COLOR1							COLOR2
 		//FRONT FACE
-		{Vector3D(-0.5f,-0.5f,-0.5f),	Vector3D( 1.0f, 0.0f, 0.0f),	Vector3D( 0.2f, 0.0f, 0.0f)},
-		{Vector3D(-0.5f, 0.5f,-0.5f),	Vector3D( 1.0f, 1.0f, 0.0f),	Vector3D( 0.2f, 0.2f, 0.0f)},
-		{Vector3D( 0.5f, 0.5f,-0.5f),	Vector3D( 1.0f, 1.0f, 0.0f),	Vector3D( 0.2f, 0.2f, 0.0f)},
-		{Vector3D( 0.5f,-0.5f,-0.5f),	Vector3D( 1.0f, 0.0f, 0.0f),	Vector3D( 0.2f, 0.0f, 0.0f)},
+		{Vector3D(-0.5f,-0.5f,-0.5f),	Vector3D( 0.0f, 0.0f, 0.0f),	Vector3D( 0.0f, 0.0f, 0.0f)},
+		{Vector3D(-0.5f, 0.5f,-0.5f),	Vector3D( 0.0f, 0.0f, 0.0f),	Vector3D( 0.0f, 0.0f, 0.0f)},
+		{Vector3D( 0.5f, 0.5f,-0.5f),	Vector3D( 0.0f, 0.0f, 0.0f),	Vector3D( 0.0f, 0.0f, 0.0f)},
+		{Vector3D( 0.5f,-0.5f,-0.5f),	Vector3D( 0.0f, 0.0f, 0.0f),	Vector3D( 0.0f, 0.0f, 0.0f)},
 
 		//BACK FACE
-		{Vector3D( 0.5f,-0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 0.0f),	Vector3D( 0.0f, 0.2f, 0.0f)},
-		{Vector3D( 0.5f, 0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 1.0f),	Vector3D( 0.0f, 0.2f, 0.2f)},
-		{Vector3D(-0.5f, 0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 1.0f),	Vector3D( 0.0f, 0.2f, 0.2f)},
-		{Vector3D(-0.5f,-0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 0.0f),	Vector3D( 0.0f, 0.2f, 0.0f)}
+		{Vector3D( 0.5f,-0.5f, 0.5f),	Vector3D( 0.0f, 0.0f, 0.0f),	Vector3D( 0.0f, 0.0f, 0.0f)},
+		{Vector3D( 0.5f, 0.5f, 0.5f),	Vector3D( 0.0f, 0.0f, 0.0f),	Vector3D( 0.0f, 0.0f, 0.0f)},
+		{Vector3D(-0.5f, 0.5f, 0.5f),	Vector3D( 0.0f, 0.0f, 0.0f),	Vector3D( 0.0f, 0.0f, 0.0f)},
+		{Vector3D(-0.5f,-0.5f, 0.5f),	Vector3D( 0.0f, 0.0f, 0.0f),	Vector3D( 0.0f, 0.0f, 0.0f)}
 
 		//POSITION						COLOR1							COLOR2
 		//FRONT FACE

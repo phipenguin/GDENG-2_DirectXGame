@@ -28,6 +28,9 @@ public:
 	bool loadAudioFile(const wchar_t* file_name);
 	bool playAudio();
 
+	void setVolume(float volume);
+	void setPitch(float pitch);
+
 	bool release();
 	~AudioSystem();
 private:

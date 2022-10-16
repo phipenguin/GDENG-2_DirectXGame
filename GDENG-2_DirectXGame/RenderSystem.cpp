@@ -23,7 +23,7 @@ void RenderSystem::initializePlanes(void* shader_byte_code, size_t size_shader)
 	Plane* plane = new Plane("Plane", shader_byte_code, size_shader);
     plane->setAnimationSpeed(2.0f);
     plane->setPosition(Vector3D(0.0f, 0.0f, 0.0f));
-    plane->setScale(Vector3D(0.75f, 0.75f, 0.75f));
+    plane->setScale(Vector3D(1.25f, 1.25f, 1.25f));
 
     planesList.push_front(plane);
 }
@@ -43,7 +43,7 @@ void RenderSystem::initializeCubes(void* shader_byte_code, size_t size_shader)
     Cube* cuboid = new Cube("Cube", shader_byte_code, size_shader);
     cuboid->setAnimationSpeed(2.0f);
     cuboid->setPosition(Vector3D(0.0f, 0.0f, 0.0f));
-    cuboid->setScale(Vector3D(0.25f, 0.25f, 0.25f));
+    cuboid->setScale(Vector3D(0.5f, 0.5f, 0.5f));
     this->cubesList.push_front(cuboid);
 }
 
