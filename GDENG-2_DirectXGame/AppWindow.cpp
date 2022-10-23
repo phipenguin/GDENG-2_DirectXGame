@@ -5,6 +5,7 @@
 #include "Vector3D.h"
 #include <Windows.h>
 #include <string>
+#include <algorithm>
 
 AppWindow* AppWindow::sharedInstance = NULL;
 
@@ -51,7 +52,6 @@ void AppWindow::onUpdate()
 	renderSystem->drawPlanes(rc.right - rc.left, rc.bottom - rc.top, m_vs, m_ps);
 	renderSystem->drawCubes(rc.right - rc.left, rc.bottom - rc.top, m_vs, m_ps);
 
-	char audio[50]{};
 	wchar_t constTowchar[500];
 	float v = volume;
 	float p = pitch;
@@ -61,15 +61,36 @@ void AppWindow::onUpdate()
 	
 	ImGui::Begin("Audio Control");
 	ImGui::Text("Audio Source:");
-	ImGui::InputText("source input", audio, sizeof(audio), 0, NULL, NULL);
+	ImGui::InputText("source input", audioInput, sizeof(audioInput), 0, NULL, NULL);
 
-	mbstowcs_s(0, constTowchar, strlen(audio) + 1, audio, _TRUNCATE);
-	
-	if(!isAudioPlay && strcmp(audio, "Morning Routine.wav") == 0)
+	if (ImGui::Button("Play Audio"))
 	{
-		m_audio_system->loadAudioFile(constTowchar);
-		m_audio_system->playAudio();
-		isAudioPlay = true;
+		if(!isAudioPlay)
+		{
+			if (strcmp(audioInput, "Morning Routine.wav") == 0)
+			{
+				mbstowcs_s(0, constTowchar, strlen(audioInput) + 1, audioInput, _TRUNCATE);
+				m_audio_system->loadAudioFile(constTowchar);
+				isAudioPlay = true;
+			}
+		
+			m_audio_system->playAudio();
+		}
+
+		std::cout << "Play Button Pressed" << std::endl;
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("Stop Audio"))
+	{
+		if (isAudioPlay)
+		{
+			m_audio_system->stopAudio();
+			isAudioPlay = false;
+		}
+
+		std::cout << "Stop Button Pressed" << std::endl;
 	}
 
 	ImGui::Text(" ");

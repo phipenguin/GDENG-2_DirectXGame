@@ -95,6 +95,12 @@ bool AudioSystem::playAudio()
     return true;
 }
 
+void AudioSystem::stopAudio()
+{
+    m_source_voice->Stop();
+    m_source_voice->FlushSourceBuffers();
+}
+
 void AudioSystem::setVolume(float volume)
 {
     m_master_voice->SetVolume(volume / 100.0f);

@@ -48,6 +48,7 @@ private:
 	PixelShader* m_ps;
 
 	AudioSystem* m_audio_system;
+	char audioInput[50]{};
 	bool isAudioPlay = false;
 	float volume = 100.0f;
 	float pitch = 1.0f;

@@ -27,6 +27,7 @@ public:
 
 	bool loadAudioFile(const wchar_t* file_name);
 	bool playAudio();
+	void stopAudio();
 
 	void setVolume(float volume);
 	void setPitch(float pitch);
