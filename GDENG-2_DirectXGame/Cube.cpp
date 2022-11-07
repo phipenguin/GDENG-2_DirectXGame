@@ -8,18 +8,18 @@ Cube::Cube(string name, void* shader_byte_code, size_t size_shader) : AGameObjec
 {
 	Vertex vextex_list[] =
 	{
-		//POSITION						COLOR1							COLOR2
+		//POSITION										COLOR1										COLOR2
 		//FRONT FACE
-		{Vector3D(-0.5f,-0.5f,-0.5f),	Vector3D( 1.0f, 0.0f, 0.0f),	Vector3D( 0.2f, 0.0f, 0.0f)},
-		{Vector3D(-0.5f, 0.5f,-0.5f),	Vector3D( 1.0f, 1.0f, 0.0f),	Vector3D( 0.2f, 0.2f, 0.0f)},
-		{Vector3D( 0.5f, 0.5f,-0.5f),	Vector3D( 1.0f, 1.0f, 0.0f),	Vector3D( 0.2f, 0.2f, 0.0f)},
-		{Vector3D( 0.5f,-0.5f,-0.5f),	Vector3D( 1.0f, 0.0f, 0.0f),	Vector3D( 0.2f, 0.0f, 0.0f)},
+		{Vector3D(-0.5f,-0.5f,-0.5f),	Vector3D( 1.0f, 0.0f, 0.0f),	Vector3D( 1.0f, 0.0f, 0.0f)},
+		{Vector3D(-0.5f, 0.5f,-0.5f),	Vector3D( 0.0f, 1.0f, 0.0f),	Vector3D( 0.0f, 1.0f, 0.0f)},
+		{Vector3D( 0.5f, 0.5f,-0.5f),	Vector3D( 0.0f, 0.0f, 1.0f),	Vector3D( 0.0f, 0.0f, 1.0f)},
+		{Vector3D( 0.5f,-0.5f,-0.5f),	Vector3D( 1.0f, 1.0f, 0.0f),	Vector3D( 1.0f, 1.0f, 0.0f)},
 
 		//BACK FACE
-		{Vector3D( 0.5f,-0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 0.0f),	Vector3D( 0.0f, 0.2f, 0.0f)},
-		{Vector3D( 0.5f, 0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 1.0f),	Vector3D( 0.0f, 0.2f, 0.2f)},
-		{Vector3D(-0.5f, 0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 1.0f),	Vector3D( 0.0f, 0.2f, 0.2f)},
-		{Vector3D(-0.5f,-0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 0.0f),	Vector3D( 0.0f, 0.2f, 0.0f)}
+		{Vector3D( 0.5f,-0.5f, 0.5f),	Vector3D( 0.0f, 1.0f, 1.0f),	Vector3D( 0.0f, 1.0f, 1.0f)},
+		{Vector3D( 0.5f, 0.5f, 0.5f),	Vector3D( 1.0f, 0.0f, 1.0f),	Vector3D( 1.0f, 0.0f, 1.0f)},
+		{Vector3D(-0.5f, 0.5f, 0.5f),	Vector3D( 0.7f, 0.1f, 0.2f),	Vector3D( 0.7f, 0.1f, 0.2f)},
+		{Vector3D(-0.5f,-0.5f, 0.5f),	Vector3D( 0.3f, 0.3f, 0.3f),	Vector3D( 0.3f, 0.3f, 0.3f)}
 
 		//POSITION						COLOR1							COLOR2
 		//FRONT FACE
@@ -82,9 +82,72 @@ void Cube::update(float deltaTime)
 	this->deltaTime = deltaTime;
 
 	this->ticks += deltaTime;
+	
+	//float rotSpeed = this->ticks * this->speed;
+	//this->setRotation(rotSpeed, rotSpeed, rotSpeed);
+	//if (isPosGoingPositive)
+	//{
+	//	this->setPosition(this->getLocalPosition().lerp(this->getLocalPosition(), Vector3D(1.0f, 1.0f, 0.0f), this->deltaTime * this->speed));
 
-	float rotSpeed = this->ticks * this->speed;
-	this->setRotation(rotSpeed, rotSpeed, rotSpeed);
+	//	if (this->getLocalPosition().m_x >= 0.99f && this->getLocalPosition().m_y >= 0.99f)
+	//	{
+	//		this->setPosition(1.0f, 1.0f, 0.0f);
+	//		isPosGoingPositive = false;
+	//	}
+
+	//	if (!isScaleGettingBigger)
+	//	{
+	//		this->setScale(this->getLocalScale().lerp(this->getLocalScale(), Vector3D(0.25f, 0.25f, 0.25f), this->deltaTime * this->speed));
+
+	//		if (this->getLocalScale().m_x <= 0.26f && this->getLocalScale().m_y <= 0.26f && this->getLocalScale().m_z <= 0.26f)
+	//		{
+	//			this->setScale(0.25f, 0.25f, 0.25f);
+	//			isScaleGettingBigger = true;
+	//		}
+	//	}
+	//}
+	//else
+	//{
+	//	this->setPosition(this->getLocalPosition().lerp(this->getLocalPosition(), Vector3D(-1.0f, -1.0f, 0.0f), this->deltaTime * this->speed));
+
+	//	if (this->getLocalPosition().m_x <= -0.99f && this->getLocalPosition().m_y <= -0.99f)
+	//	{
+	//		this->setPosition(-1.0f, -1.0f, 0.0f);
+	//		isPosGoingPositive = true;
+	//	}
+
+	//	if (isScaleGettingBigger)
+	//	{
+	//		this->setScale(this->getLocalScale().lerp(this->getLocalScale(), Vector3D(1.0f, 1.0f, 1.0f), this->deltaTime * this->speed));
+
+	//		if (this->getLocalScale().m_x >= 0.99f && this->getLocalScale().m_y >= 0.99f && this->getLocalScale().m_z >= 0.99f)
+	//		{
+	//			this->setScale(1.0f, 1.0f, 1.0f);
+	//			isScaleGettingBigger = false;
+	//		}
+	//	}
+	//}
+
+	//if (isCubeWarpingToPlane)
+	//{
+	//	this->setScale(this->getLocalScale().lerp(this->getLocalScale(), Vector3D(1.0f, 0.005f, 1.0f), this->deltaTime * this->speed));
+
+	//	if (this->getLocalScale().m_x >= 0.99f && this->getLocalScale().m_y <= 0.0059f && this->getLocalScale().m_z >= 0.99f)
+	//	{
+	//		this->setScale(1.0f, 0.005f, 1.0f);
+	//		isCubeWarpingToPlane = false;
+	//	}
+	//}
+	//else
+	//{
+	//	this->setScale(this->getLocalScale().lerp(this->getLocalScale(), Vector3D(0.5f, 0.5f, 0.5f), this->deltaTime * this->speed));
+
+	//	if (this->getLocalScale().m_x >= 0.49f && this->getLocalScale().m_y >= 0.49f && this->getLocalScale().m_z >= 0.49f)
+	//	{
+	//		this->setScale(0.5f, 0.5f, 0.5f);
+	//		isCubeWarpingToPlane = true;
+	//	}
+	//}
 }
 
 void Cube::draw(int width, int height, VertexShader* vertex_shader, PixelShader* pixel_shader)
@@ -127,8 +190,10 @@ void Cube::draw(int width, int height, VertexShader* vertex_shader, PixelShader*
 	Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
 	cbData.viewMatrix = cameraMatrix;
 
-	float aspectRatio = (float) width / (float)height;
+	float aspectRatio = (float)width / (float)height;
 	cbData.projMatrix.setPerspectiveFovLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
+
+	//std::cout << "Rotation: " << "(" << this->getLocalRotation().m_x << ", " << this->getLocalRotation().m_y << ", " << this->getLocalRotation().m_z << ")" << std::endl;
 
 	//cbData.viewMatrix.setIdentity();
 	//cbData.projMatrix.setOrthoLH(width / 400.0f, height / 400.0f, -4.0f, 4.0f);

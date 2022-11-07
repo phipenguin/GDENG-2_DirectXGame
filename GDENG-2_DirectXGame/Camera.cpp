@@ -4,7 +4,10 @@
 
 Camera::Camera(string name) : AGameObject(name)
 {
-    this->setPosition(0.0f, 0.0f, -1.0f);
+    this->setPosition(0.0f, 0.0f, -2.0f);
+    //this->setPosition(5.0f, 3.0f, -5.0f);
+    //this->setRotation(0.3f, -0.8f, this->getLocalRotation().m_z);
+    //this->setRotation(0.4f, -0.5f, this->getLocalRotation().m_z);
     this->updateViewMatrix();
     InputSystem::getInstance()->addListener(this);
 }
@@ -79,6 +82,7 @@ void Camera::onMouseMove(const Point& delta_mouse_pos)
         y += delta_mouse_pos.m_x * speed;
 
         this->setRotation(x, y, z);
+        std::cout << "Camera Rotation: " << "(" << this->getLocalRotation().m_x << ", " << this->getLocalRotation().m_y << ", " << this->getLocalRotation().m_z << ")" << std::endl;
         this->updateViewMatrix();
     }
 }

@@ -124,7 +124,19 @@ void AppWindow::createGraphicsWindow()
 
 	graphicsEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 	m_vs = graphicsEngine->createVertexShader(shader_byte_code, size_shader);
-	
+
+	//for (int i = 0; i < 15; i++)
+	//{
+	//	numOfCards++;
+	//	renderSystem->initializePlanes(shader_byte_code, size_shader);
+	//}
+
+	//for (int i = 0; i < 3; i++)
+	//{
+	//	numOfCubes++;
+	//	renderSystem->initializeCubes(shader_byte_code, size_shader);
+	//}
+
 	renderSystem->initializePlanes(shader_byte_code, size_shader);
 	renderSystem->initializeCubes(shader_byte_code, size_shader);
 

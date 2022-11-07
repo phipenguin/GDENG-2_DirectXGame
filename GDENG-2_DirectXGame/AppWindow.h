@@ -33,6 +33,9 @@ public:
 
 	void createGraphicsWindow();
 
+	//int numOfCards = 0;
+	//int numOfCubes = 0;
+
 private:
 	AppWindow();
 	~AppWindow();
@@ -43,4 +46,5 @@ private:
 	SwapChain* m_swap_chain;
 	VertexShader* m_vs;
 	PixelShader* m_ps;
+
 };

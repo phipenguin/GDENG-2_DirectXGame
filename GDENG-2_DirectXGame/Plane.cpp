@@ -7,13 +7,13 @@ Plane::Plane(string name, void* shader_byte_code, size_t size_shader) : AGameObj
 {
 	Vertex vextex_list[] =
 	{
-		//POSITION						COLOR1							COLOR2
+		//POSITION										COLOR1										COLOR2
 		{Vector3D(-1.0f, 0.0f,-1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 		{Vector3D(-1.0f, 0.0f,-1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 		{Vector3D( 1.0f, 0.0f,-1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 		{Vector3D( 1.0f, 0.0f,-1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 
-		//POSITION						COLOR1							COLOR2
+		//POSITION										COLOR1										COLOR2
 		{Vector3D(-1.0f, 0.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 		{Vector3D(-1.0f, 0.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 		{Vector3D( 1.0f, 0.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
@@ -92,14 +92,14 @@ void Plane::draw(int width, int height, VertexShader* vertex_shader, PixelShader
 	Matrix4x4 translationMatrix; translationMatrix.setTranslation(this->getLocalPosition());
 	Matrix4x4 scaleMatrix; scaleMatrix.setScale(this->getLocalScale());
 	Vector3D rotation = this->getLocalRotation();
-	//Matrix4x4 zMatrix; zMatrix.setRotationZ(rotation.m_z);
+	Matrix4x4 zMatrix; zMatrix.setRotationZ(rotation.m_z);
 	Matrix4x4 xMatrix; xMatrix.setRotationX(rotation.m_x);
-	//Matrix4x4 yMatrix; yMatrix.setRotationY(rotation.m_y);
+	Matrix4x4 yMatrix; yMatrix.setRotationY(rotation.m_y);
 
 	Matrix4x4 rotMatrix; rotMatrix.setIdentity();
 	rotMatrix *= xMatrix;
-	//rotMatrix *= yMatrix;
-	//rotMatrix *= zMatrix;
+	rotMatrix *= yMatrix;
+	rotMatrix *= zMatrix;
 
 	allMatrix *= scaleMatrix;
 	allMatrix *= rotMatrix;
@@ -110,7 +110,7 @@ void Plane::draw(int width, int height, VertexShader* vertex_shader, PixelShader
 	Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
 	cbData.viewMatrix = cameraMatrix;
 
-	float aspectRatio = (float) width / (float)height;
+	float aspectRatio = (float)width / (float)height;
 	cbData.projMatrix.setPerspectiveFovLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
 
 	//cbData.viewMatrix.setIdentity();
@@ -127,6 +127,8 @@ void Plane::draw(int width, int height, VertexShader* vertex_shader, PixelShader
 
 	//SET THE VERTICES OF THE TRIANGLE TO DRAW
 	deviceContext->setVertexBuffer(vertex_buffer);
+	//SET THE INDICES OF THE TRIANGLE TO DRAW
+	deviceContext->setIndexBuffer(index_buffer);
 
 	// FINALLY DRAW THE TRIANGLE
 	//deviceContext->drawTriangleStrip(vertex_buffer->getSizeVertexList(), 0);

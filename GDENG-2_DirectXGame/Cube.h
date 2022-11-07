@@ -21,6 +21,10 @@ private:
 	IndexBuffer* index_buffer;
 	ConstantBuffer* constant_buffer;
 
+	//bool isPosGoingPositive = true;
+	//bool isScaleGettingBigger = false;
+	//bool isCubeWarpingToPlane = true;
+
 	float ticks = 0.0f;
 	float deltaPosition = 0.0f;
 	//float deltaScale = 0.0f;
