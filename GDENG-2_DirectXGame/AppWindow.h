@@ -4,12 +4,11 @@
 #include "RenderSystem.h"
 #include "SwapChain.h"
 #include "DeviceContext.h"
-//#include "VertexBuffer.h"
-#include "ConstantBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
+#include "InputListener.h"
 
-class AppWindow : public Window
+class AppWindow : public Window, public InputListener
 {
 public:
 	static AppWindow* getInstance();
@@ -18,7 +17,19 @@ public:
 	// Inherited via Window
 	virtual void onCreate() override;
 	virtual void onUpdate() override;
-	virtual void onDestroy() override;
+	virtual void onDestroy() override;	
+	virtual void onFocus() override;
+	virtual void onKillFocus() override;
+
+	// Inherited via InputListener
+	virtual void onKeyDown(int key) override;
+	virtual void onKeyUp(int key) override;
+
+	virtual void onMouseMove(const Point& delta_mouse_pos) override;
+	virtual void onLeftMouseDown(const Point& mouse_pos) override;
+	virtual void onLeftMouseUp(const Point& mouse_pos) override;
+	virtual void onRightMouseDown(const Point& mouse_pos) override;
+	virtual void onRightMouseUp(const Point& mouse_pos) override;
 
 	void createGraphicsWindow();
 
@@ -30,12 +41,6 @@ private:
 	static AppWindow* sharedInstance;
 
 	SwapChain* m_swap_chain;
-	//VertexBuffer* m_vb;
 	VertexShader* m_vs;
 	PixelShader* m_ps;
-	ConstantBuffer* m_cb;
-
-	//unsigned long m_old_time = 0;
-	//float m_delta_time = 0;
-	//float m_angle = 0;
 };

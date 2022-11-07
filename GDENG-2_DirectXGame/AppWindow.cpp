@@ -1,5 +1,7 @@
 #include "AppWindow.h"
 #include "Vector3D.h"
+#include "InputSystem.h"
+#include "SceneCameraHandler.h"
 #include <Windows.h>
 
 AppWindow* AppWindow::sharedInstance = NULL;
@@ -27,11 +29,15 @@ void AppWindow::initialize()
 void AppWindow::onCreate()
 {
 	Window::onCreate();
+
+	InputSystem::initialize();
 }
 
 void AppWindow::onUpdate()
 {
 	Window::onUpdate();
+
+	InputSystem::getInstance()->update();
 
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
 	DeviceContext* deviceContext = graphicsEngine->getImmediateDeviceContext();
@@ -45,23 +51,9 @@ void AppWindow::onUpdate()
 
 	renderSystem->drawPlanes(rc.right - rc.left, rc.bottom - rc.top, m_vs, m_ps);
 	renderSystem->drawCubes(rc.right - rc.left, rc.bottom - rc.top, m_vs, m_ps);
+	
+	SceneCameraHandler::getInstance()->update();
 
-	//m_cb->update(graphicsEngine->getImmediateDeviceContext(), &cc);
-
-	//graphicsEngine->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
-	//graphicsEngine->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
-
-	////SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
-	//graphicsEngine->getImmediateDeviceContext()->setVertexShader(m_vs);
-	//graphicsEngine->getImmediateDeviceContext()->setPixelShader(m_ps);
-
-
-	////SET THE VERTICES OF THE TRIANGLE TO DRAW
-	//graphicsEngine->getImmediateDeviceContext()->setVertexBuffer(m_vb);
-
-	//// FINALLY DRAW THE TRIANGLE
-	//graphicsEngine->getImmediateDeviceContext()->drawTriangleStrip(m_vb->getSizeVertexList(), 0);
-	//GraphicsEngine::get()->getImmediateDeviceContext()->drawTriangleList(m_vb->getSizeVertexList(), 0);
 	m_swap_chain->present(true);
 }
 
@@ -71,14 +63,55 @@ void AppWindow::onDestroy()
 	m_swap_chain->release();
 	m_vs->release();
 	m_ps->release();
+	InputSystem::destroy();
+	SceneCameraHandler::destroy();
 	GraphicsEngine::destroy();
 	RenderSystem::destroy();
+}
+
+void AppWindow::onFocus()
+{
+	InputSystem::getInstance()->addListener(this);
+}
+
+void AppWindow::onKillFocus()
+{
+	InputSystem::getInstance()->removeListener(this);
+}
+
+void AppWindow::onKeyDown(int key)
+{
+}
+
+void AppWindow::onKeyUp(int key)
+{
+}
+
+void AppWindow::onMouseMove(const Point& delta_mouse_pos)
+{
+}
+
+void AppWindow::onLeftMouseDown(const Point& mouse_pos)
+{
+}
+
+void AppWindow::onLeftMouseUp(const Point& mouse_pos)
+{
+}
+
+void AppWindow::onRightMouseDown(const Point& mouse_pos)
+{
+}
+
+void AppWindow::onRightMouseUp(const Point& mouse_pos)
+{
 }
 
 void AppWindow::createGraphicsWindow()
 {
 	GraphicsEngine::initialize();
 	RenderSystem::initialize();
+	SceneCameraHandler::initialize();
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
 	RenderSystem* renderSystem = RenderSystem::getInstance();
 	m_swap_chain = graphicsEngine->createSwapChain();
@@ -91,10 +124,6 @@ void AppWindow::createGraphicsWindow()
 
 	graphicsEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 	m_vs = graphicsEngine->createVertexShader(shader_byte_code, size_shader);
-
-	//renderSystem->initializeQuads(1, shader_byte_code, size_shader);
-	//renderSystem->initializeQuads(2, shader_byte_code, size_shader);
-	//renderSystem->initializeQuads(3, shader_byte_code, size_shader);
 	
 	renderSystem->initializePlanes(shader_byte_code, size_shader);
 	renderSystem->initializeCubes(shader_byte_code, size_shader);

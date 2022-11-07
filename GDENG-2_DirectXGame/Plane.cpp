@@ -1,22 +1,23 @@
 #include "Plane.h"
 #include "GraphicsEngine.h"
 #include "DeviceContext.h"
+#include "SceneCameraHandler.h"
 
 Plane::Plane(string name, void* shader_byte_code, size_t size_shader) : AGameObject(name)
 {
 	Vertex vextex_list[] =
 	{
 		//POSITION						COLOR1							COLOR2
-		{Vector3D(-0.5f, 0.0f,-0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
-		{Vector3D(-0.5f, 0.0f,-0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
-		{Vector3D( 0.5f, 0.0f,-0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
-		{Vector3D( 0.5f, 0.0f,-0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D(-1.0f, 0.0f,-1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D(-1.0f, 0.0f,-1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D( 1.0f, 0.0f,-1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D( 1.0f, 0.0f,-1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 
 		//POSITION						COLOR1							COLOR2
-		{Vector3D(-0.5f, 0.0f, 0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
-		{Vector3D(-0.5f, 0.0f, 0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
-		{Vector3D( 0.5f, 0.0f, 0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
-		{Vector3D( 0.5f, 0.0f, 0.5f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)}
+		{Vector3D(-1.0f, 0.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D(-1.0f, 0.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D( 1.0f, 0.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
+		{Vector3D( 1.0f, 0.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)}
 	};
 
 	vertex_buffer = GraphicsEngine::getInstance()->createVertexBuffer();
@@ -53,7 +54,7 @@ Plane::Plane(string name, void* shader_byte_code, size_t size_shader) : AGameObj
 	constant_buffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	constant_buffer->load(&cbData, sizeof(CBData));
 
-	this->setRotation(50.0f, 0.0f, 0.0f);
+	this->setRotation(0.0f, 0.0f, 0.0f);
 }
 
 Plane::~Plane()
@@ -105,8 +106,15 @@ void Plane::draw(int width, int height, VertexShader* vertex_shader, PixelShader
 	allMatrix *= translationMatrix;
 
 	cbData.worldMatrix = allMatrix;
-	cbData.viewMatrix.setIdentity();
-	cbData.projMatrix.setOrthoLH(width / 400.0f, height / 400.0f, -4.0f, 4.0f);
+
+	Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
+	cbData.viewMatrix = cameraMatrix;
+
+	float aspectRatio = (float) width / (float)height;
+	cbData.projMatrix.setPerspectiveFovLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
+
+	//cbData.viewMatrix.setIdentity();
+	//cbData.projMatrix.setOrthoLH(width / 400.0f, height / 400.0f, -4.0f, 4.0f);
 
 	constant_buffer->update(graphicsEngine->getImmediateDeviceContext(), &cbData);
 
