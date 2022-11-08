@@ -12,12 +12,11 @@ void GraphicsEngine::initialize()
 	sharedInstance = new GraphicsEngine();
 
 	sharedInstance->m_render_system = new RenderSystem();
-	sharedInstance->m_render_system->init();
 }
 
 void GraphicsEngine::destroy()
 {
-	sharedInstance->m_render_system->release();
+	delete sharedInstance->getRenderSystem();
 	delete sharedInstance;
 }
 

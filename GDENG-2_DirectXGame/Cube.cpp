@@ -70,8 +70,6 @@ Cube::Cube(string name, void* shader_byte_code, size_t size_shader) : AGameObjec
 
 Cube::~Cube()
 {
-	delete vertex_buffer;
-	delete index_buffer;
 	AGameObject::~AGameObject();
 }
 
@@ -148,10 +146,10 @@ void Cube::update(float deltaTime)
 	//}
 }
 
-void Cube::draw(int width, int height, VertexShader* vertex_shader, PixelShader* pixel_shader)
+void Cube::draw(int width, int height, VertexShaderPtr vertex_shader, PixelShaderPtr pixel_shader)
 {
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
-	DeviceContext* deviceContext = graphicsEngine->getInstance()->getRenderSystem()->getImmediateDeviceContext();
+	DeviceContextPtr deviceContext = graphicsEngine->getInstance()->getRenderSystem()->getImmediateDeviceContext();
 
 	CBData cbData = {};
 	cbData.time = this->ticks;

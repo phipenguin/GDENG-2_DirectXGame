@@ -51,7 +51,7 @@ void Camera::update(float deltaTime)
     }
 }
 
-void Camera::draw(int width, int height, VertexShader* vertex_shader, PixelShader* pixel_shader)
+void Camera::draw(int width, int height, VertexShaderPtr vertex_shader, PixelShaderPtr pixel_shader)
 {
 }
 

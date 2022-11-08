@@ -9,7 +9,7 @@ public:
 	~Camera();
 
 	void update(float deltaTime) override;
-	void draw(int width, int height, VertexShader* vertex_shader, PixelShader* pixel_shader) override;
+	void draw(int width, int height, VertexShaderPtr vertex_shader, PixelShaderPtr pixel_shader) override;
 	Matrix4x4 getViewMatrix();
 
 	virtual void onKeyDown(int key) override;

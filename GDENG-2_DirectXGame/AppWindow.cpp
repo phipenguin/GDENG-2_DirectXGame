@@ -2,6 +2,7 @@
 #include "Vector3D.h"
 #include "InputSystem.h"
 #include "SceneCameraHandler.h"
+#include "UIManager.h"
 #include <Windows.h>
 
 AppWindow* AppWindow::sharedInstance = NULL;
@@ -31,6 +32,8 @@ void AppWindow::onCreate()
 	Window::onCreate();
 
 	InputSystem::initialize();
+
+	
 }
 
 void AppWindow::onUpdate()
@@ -41,7 +44,7 @@ void AppWindow::onUpdate()
 
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
 	RenderSystem* renderSystem = graphicsEngine->getRenderSystem();
-	DeviceContext* deviceContext = graphicsEngine->getRenderSystem()->getImmediateDeviceContext();
+	DeviceContextPtr deviceContext = graphicsEngine->getRenderSystem()->getImmediateDeviceContext();
 	//CLEAR THE RENDER TARGET 
 	deviceContext->clearRenderTargetColor(this->m_swap_chain,
 		0.9f, 0.6f, 0.9f, 1.0f);
@@ -54,16 +57,16 @@ void AppWindow::onUpdate()
 	
 	SceneCameraHandler::getInstance()->update();
 
+	UIManager::getInstance()->drawAllUI();
+
 	m_swap_chain->present(true);
 }
 
 void AppWindow::onDestroy()
 {
 	Window::onDestroy();
-	delete m_swap_chain;
-	delete m_vs;
-	delete m_ps;
 	InputSystem::destroy();
+	UIManager::destroy();
 	SceneCameraHandler::destroy();
 	GraphicsEngine::destroy();
 }
@@ -110,6 +113,7 @@ void AppWindow::createGraphicsWindow()
 {
 	GraphicsEngine::initialize();
 	SceneCameraHandler::initialize();
+	UIManager::initialize(this->m_hwnd);
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
 	RenderSystem* renderSystem = graphicsEngine->getRenderSystem();
 

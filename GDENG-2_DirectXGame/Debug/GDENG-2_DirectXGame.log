@@ -1,1 +1,15 @@
-﻿  GDENG-2_DirectXGame.vcxproj -> C:\Users\Admin\source\repos\GDENG-2_DirectXGame\Debug\GDENG-2_DirectXGame.exe
+﻿  AppWindow.cpp
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(106,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(107,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(108,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(109,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  CreditsScreen.cpp
+  MenuScreen.cpp
+  UIManager.cpp
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(106,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(107,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(108,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(109,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\source\repos\GDENG-2_DirectXGame\GDENG-2_DirectXGame\UIManager.cpp(30,20): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  GDENG-2_DirectXGame.vcxproj -> C:\Users\Admin\source\repos\GDENG-2_DirectXGame\Debug\GDENG-2_DirectXGame.exe

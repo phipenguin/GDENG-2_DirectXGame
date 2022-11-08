@@ -11,15 +11,15 @@ public:
 	~Cube();
 
 	void update(float deltaTime) override;
-	void draw(int width, int height, VertexShader* vertex_shader, PixelShader* pixel_shader) override;
+	void draw(int width, int height, VertexShaderPtr vertex_shader, PixelShaderPtr pixel_shader) override;
 
 	void setAnimationSpeed(float speed);
 
 private:
 
-	VertexBuffer* vertex_buffer;
-	IndexBuffer* index_buffer;
-	ConstantBuffer* constant_buffer;
+	VertexBufferPtr vertex_buffer;
+	IndexBufferPtr index_buffer;
+	ConstantBufferPtr constant_buffer;
 
 	//bool isPosGoingPositive = true;
 	//bool isScaleGettingBigger = false;

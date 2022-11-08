@@ -57,8 +57,6 @@ Plane::Plane(string name, void* shader_byte_code, size_t size_shader) : AGameObj
 
 Plane::~Plane()
 {
-	delete vertex_buffer;
-	delete constant_buffer;
 	AGameObject::~AGameObject();
 }
 
@@ -69,10 +67,10 @@ void Plane::update(float deltaTime)
 	this->ticks += deltaTime;
 }
 
-void Plane::draw(int width, int height, VertexShader* vertex_shader, PixelShader* pixel_shader)
+void Plane::draw(int width, int height, VertexShaderPtr vertex_shader, PixelShaderPtr pixel_shader)
 {
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
-	DeviceContext* deviceContext = graphicsEngine->getInstance()->getRenderSystem()->getImmediateDeviceContext();
+	DeviceContextPtr deviceContext = graphicsEngine->getInstance()->getRenderSystem()->getImmediateDeviceContext();
 	
 	CBData cbData = {};
 	cbData.time = this->ticks;
