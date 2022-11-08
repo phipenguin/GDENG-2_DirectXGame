@@ -35,8 +35,8 @@ Cube::Cube(string name, void* shader_byte_code, size_t size_shader) : AGameObjec
 		//{Vector3D(-0.5f,-0.5f, 0.5f),	Vector3D( 0.4f, 1.0f, 0.5f),	Vector3D( 1.0f, 0.4f, 0.7f)}
 	};
 
-	vertex_buffer = GraphicsEngine::getInstance()->createVertexBuffer();
-	vertex_buffer->load(vextex_list, sizeof(Vertex), ARRAYSIZE(vextex_list), shader_byte_code, size_shader);
+	vertex_buffer = GraphicsEngine::getInstance()->getRenderSystem()->createVertexBuffer(vextex_list, 
+		sizeof(Vertex), ARRAYSIZE(vextex_list), shader_byte_code, size_shader);
 
 	unsigned int index_list[]=
 	{
@@ -60,20 +60,18 @@ Cube::Cube(string name, void* shader_byte_code, size_t size_shader) : AGameObjec
 		1,0,7
 	};
 
-	index_buffer = GraphicsEngine::getInstance()->createIndexBuffer();
-	index_buffer->load(index_list, ARRAYSIZE(index_list));
+	index_buffer = GraphicsEngine::getInstance()->getRenderSystem()->createIndexBuffer(index_list, ARRAYSIZE(index_list));
 
 	CBData cbData = {};
 	cbData.time = 0;
 
-	constant_buffer = GraphicsEngine::getInstance()->createConstantBuffer();
-	constant_buffer->load(&cbData, sizeof(CBData));
+	constant_buffer = GraphicsEngine::getInstance()->getRenderSystem()->createConstantBuffer(&cbData, sizeof(CBData));
 }
 
 Cube::~Cube()
 {
-	vertex_buffer->release();
-	index_buffer->release();
+	delete vertex_buffer;
+	delete index_buffer;
 	AGameObject::~AGameObject();
 }
 
@@ -153,7 +151,7 @@ void Cube::update(float deltaTime)
 void Cube::draw(int width, int height, VertexShader* vertex_shader, PixelShader* pixel_shader)
 {
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
-	DeviceContext* deviceContext = graphicsEngine->getImmediateDeviceContext();
+	DeviceContext* deviceContext = graphicsEngine->getInstance()->getRenderSystem()->getImmediateDeviceContext();
 
 	CBData cbData = {};
 	cbData.time = this->ticks;

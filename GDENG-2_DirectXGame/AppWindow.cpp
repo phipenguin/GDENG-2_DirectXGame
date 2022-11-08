@@ -40,8 +40,8 @@ void AppWindow::onUpdate()
 	InputSystem::getInstance()->update();
 
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
-	DeviceContext* deviceContext = graphicsEngine->getImmediateDeviceContext();
-	RenderSystem* renderSystem = RenderSystem::getInstance();
+	RenderSystem* renderSystem = graphicsEngine->getRenderSystem();
+	DeviceContext* deviceContext = graphicsEngine->getRenderSystem()->getImmediateDeviceContext();
 	//CLEAR THE RENDER TARGET 
 	deviceContext->clearRenderTargetColor(this->m_swap_chain,
 		0.9f, 0.6f, 0.9f, 1.0f);
@@ -60,13 +60,12 @@ void AppWindow::onUpdate()
 void AppWindow::onDestroy()
 {
 	Window::onDestroy();
-	m_swap_chain->release();
-	m_vs->release();
-	m_ps->release();
+	delete m_swap_chain;
+	delete m_vs;
+	delete m_ps;
 	InputSystem::destroy();
 	SceneCameraHandler::destroy();
 	GraphicsEngine::destroy();
-	RenderSystem::destroy();
 }
 
 void AppWindow::onFocus()
@@ -110,20 +109,18 @@ void AppWindow::onRightMouseUp(const Point& mouse_pos)
 void AppWindow::createGraphicsWindow()
 {
 	GraphicsEngine::initialize();
-	RenderSystem::initialize();
 	SceneCameraHandler::initialize();
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
-	RenderSystem* renderSystem = RenderSystem::getInstance();
-	m_swap_chain = graphicsEngine->createSwapChain();
+	RenderSystem* renderSystem = graphicsEngine->getRenderSystem();
 
 	RECT rc = this->getClientWindowRect();
-	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
+	m_swap_chain = renderSystem->createSwapChain(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;
 
-	graphicsEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
-	m_vs = graphicsEngine->createVertexShader(shader_byte_code, size_shader);
+	renderSystem->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
+	m_vs = renderSystem->createVertexShader(shader_byte_code, size_shader);
 
 	//for (int i = 0; i < 15; i++)
 	//{
@@ -140,9 +137,9 @@ void AppWindow::createGraphicsWindow()
 	renderSystem->initializePlanes(shader_byte_code, size_shader);
 	renderSystem->initializeCubes(shader_byte_code, size_shader);
 
-	graphicsEngine->releaseCompiledShader();
+	renderSystem->releaseCompiledShader();
 
-	graphicsEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
-	m_ps = graphicsEngine->createPixelShader(shader_byte_code, size_shader);
-	graphicsEngine->releaseCompiledShader();
+	renderSystem->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
+	m_ps = renderSystem->createPixelShader(shader_byte_code, size_shader);
+	renderSystem->releaseCompiledShader();
 }

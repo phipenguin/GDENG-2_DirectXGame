@@ -20,8 +20,8 @@ Plane::Plane(string name, void* shader_byte_code, size_t size_shader) : AGameObj
 		{Vector3D( 1.0f, 0.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)}
 	};
 
-	vertex_buffer = GraphicsEngine::getInstance()->createVertexBuffer();
-	vertex_buffer->load(vextex_list, sizeof(Vertex), ARRAYSIZE(vextex_list), shader_byte_code, size_shader);
+	vertex_buffer = GraphicsEngine::getInstance()->getRenderSystem()->createVertexBuffer(vextex_list, 
+		sizeof(Vertex), ARRAYSIZE(vextex_list), shader_byte_code, size_shader);
 
 	unsigned int index_list[]=
 	{
@@ -45,22 +45,20 @@ Plane::Plane(string name, void* shader_byte_code, size_t size_shader) : AGameObj
 		1,0,7
 	};
 
-	index_buffer = GraphicsEngine::getInstance()->createIndexBuffer();
-	index_buffer->load(index_list, ARRAYSIZE(index_list));
+	index_buffer = GraphicsEngine::getInstance()->getRenderSystem()->createIndexBuffer(index_list, ARRAYSIZE(index_list));
 
 	CBData cbData = {};
 	cbData.time = 0;
 
-	constant_buffer = GraphicsEngine::getInstance()->createConstantBuffer();
-	constant_buffer->load(&cbData, sizeof(CBData));
+	constant_buffer = GraphicsEngine::getInstance()->getRenderSystem()->createConstantBuffer(&cbData, sizeof(CBData));
 
 	this->setRotation(0.0f, 0.0f, 0.0f);
 }
 
 Plane::~Plane()
 {
-	vertex_buffer->release();
-	constant_buffer->release();
+	delete vertex_buffer;
+	delete constant_buffer;
 	AGameObject::~AGameObject();
 }
 
@@ -74,7 +72,7 @@ void Plane::update(float deltaTime)
 void Plane::draw(int width, int height, VertexShader* vertex_shader, PixelShader* pixel_shader)
 {
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
-	DeviceContext* deviceContext = graphicsEngine->getImmediateDeviceContext();
+	DeviceContext* deviceContext = graphicsEngine->getInstance()->getRenderSystem()->getImmediateDeviceContext();
 	
 	CBData cbData = {};
 	cbData.time = this->ticks;
@@ -116,7 +114,7 @@ void Plane::draw(int width, int height, VertexShader* vertex_shader, PixelShader
 	//cbData.viewMatrix.setIdentity();
 	//cbData.projMatrix.setOrthoLH(width / 400.0f, height / 400.0f, -4.0f, 4.0f);
 
-	constant_buffer->update(graphicsEngine->getImmediateDeviceContext(), &cbData);
+	constant_buffer->update(graphicsEngine->getInstance()->getRenderSystem()->getImmediateDeviceContext(), &cbData);
 
 	deviceContext->setConstantBuffer(vertex_shader, constant_buffer);
 	deviceContext->setConstantBuffer(pixel_shader, constant_buffer);
