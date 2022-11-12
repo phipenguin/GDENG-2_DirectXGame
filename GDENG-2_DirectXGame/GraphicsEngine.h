@@ -1,7 +1,6 @@
 #pragma once
 #include "Prerequisites.h"
-#include "RenderSystem.h"	
-#include <d3d11.h>
+#include "RenderSystem.h"
 
 class GraphicsEngine
 {

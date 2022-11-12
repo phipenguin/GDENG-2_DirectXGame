@@ -11,9 +11,14 @@ public:
 	RenderSystem();
 	~RenderSystem();
 
+	void createTexture();
+
 	SwapChainPtr createSwapChain(HWND hwnd, UINT width, UINT height);
 	DeviceContextPtr getImmediateDeviceContext();
 	ID3D11Device* getDirectXDevice();
+	ID3D11ShaderResourceView* getTexture();
+	int getImageHeight();
+	int getImageWidth();
 
 	VertexBufferPtr createVertexBuffer(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, size_t size_byte_shader);
 	IndexBufferPtr createIndexBuffer(void* list_indices, UINT size_list);
@@ -45,6 +50,10 @@ private:
 	IDXGIAdapter* m_dxgi_adapter;
 	IDXGIFactory* m_dxgi_factory;
 	ID3D11DeviceContext* m_imm_context;
+
+	int my_image_width = 0;
+	int my_image_height = 0;
+	ID3D11ShaderResourceView* m_texture;
 
 	ID3DBlob* m_blob = nullptr;
 

@@ -10,5 +10,7 @@ private:
 
 	virtual void drawUI() override;
 
+	float my_color;
+
 	friend class UIManager;
 };

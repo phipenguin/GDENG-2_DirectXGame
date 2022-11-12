@@ -1,4 +1,6 @@
 #include "MenuScreen.h"
+#include "GraphicsEngine.h"
+#include <iostream>
 
 MenuScreen::MenuScreen() : AUIScreen("MenuScreen")
 {
@@ -11,7 +13,18 @@ MenuScreen::~MenuScreen()
 
 void MenuScreen::drawUI()
 {
-	ImGui::Begin("Menu Screen");
+	ImGui::BeginMainMenuBar();
+	if (ImGui::BeginMenu("About"))
+	{
+		if (ImGui::MenuItem("Credits"))
+		{
+			
+		}
+		ImGui::EndMenu();
+	}
+	ImGui::EndMainMenuBar();
 
+	ImGui::Begin("Color Picker Screen");
+	ImGui::ColorPicker4("Color", &my_color);
 	ImGui::End();
 }

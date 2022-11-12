@@ -8,6 +8,8 @@
 #include "ConstantBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
+#include "ResourceManager.h"
+#include "imgui.h"
 #include <d3dcompiler.h>
 #include <random>
 #include <exception>
@@ -65,6 +67,15 @@ RenderSystem::~RenderSystem()
 	m_d3d_device->Release();
 }
 
+void RenderSystem::createTexture()
+{
+	ResourceManager* rm = new ResourceManager();
+
+	m_texture = NULL;
+	bool ret = rm->LoadTextureFromFile("De_La_Salle_University_Seal.png", &m_texture, &my_image_width, &my_image_height);
+	IM_ASSERT(ret);
+}
+
 SwapChainPtr RenderSystem::createSwapChain(HWND hwnd, UINT width, UINT height)
 {
 	SwapChainPtr sc = nullptr;
@@ -85,6 +96,21 @@ DeviceContextPtr RenderSystem::getImmediateDeviceContext()
 ID3D11Device* RenderSystem::getDirectXDevice()
 {
 	return this->m_d3d_device;
+}
+
+ID3D11ShaderResourceView* RenderSystem::getTexture()
+{
+	return this->m_texture;
+}
+
+int RenderSystem::getImageHeight()
+{
+	return this->my_image_height;
+}
+
+int RenderSystem::getImageWidth()
+{
+	return this->my_image_width;
 }
 
 VertexBufferPtr RenderSystem::createVertexBuffer(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, size_t size_byte_shader)

@@ -3,6 +3,7 @@
 #include "InputSystem.h"
 #include "SceneCameraHandler.h"
 #include "UIManager.h"
+#include "ResourceManager.h"
 #include <Windows.h>
 
 AppWindow* AppWindow::sharedInstance = NULL;
@@ -32,8 +33,6 @@ void AppWindow::onCreate()
 	Window::onCreate();
 
 	InputSystem::initialize();
-
-	
 }
 
 void AppWindow::onUpdate()
@@ -116,6 +115,7 @@ void AppWindow::createGraphicsWindow()
 	UIManager::initialize(this->m_hwnd);
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
 	RenderSystem* renderSystem = graphicsEngine->getRenderSystem();
+	renderSystem->createTexture();
 
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain = renderSystem->createSwapChain(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
