@@ -1,2 +1,6 @@
-﻿  ColorPickerScreen.cpp
+﻿  ShaderLibrary.cpp
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(106,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(107,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(108,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(109,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   GDENG-2_DirectXGame.vcxproj -> D:\Apps\Github\GDENG-2_DirectXGame\Debug\GDENG-2_DirectXGame.exe
