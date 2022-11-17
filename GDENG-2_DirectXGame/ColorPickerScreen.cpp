@@ -14,7 +14,7 @@ void ColorPickerScreen::drawUI()
 {
 	if (isWindowOpen)
 	{
-		ImGui::Begin("Color Picker Screen");
+		ImGui::Begin("Color Picker Screens");
 
 		ImGui::ColorPicker4("Color", &color);
 

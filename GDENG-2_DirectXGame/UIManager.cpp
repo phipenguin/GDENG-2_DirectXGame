@@ -4,6 +4,8 @@
 #include "MenuBar.h"
 #include "CreditsScreen.h"
 #include "ColorPickerScreen.h"
+#include "InspectorScreen.h"
+#include "SceneOutlinerScreen.h"
 
 UIManager* UIManager::sharedInstance = nullptr;
 
@@ -67,6 +69,14 @@ UIManager::UIManager(HWND hwnd)
 	ColorPickerScreen* colorPickerScreen = new ColorPickerScreen();
 	this->uiTable[uiNames.COLOR_PICKER_SCREEN] = colorPickerScreen;
 	this->uiList.push_back(colorPickerScreen);
+
+	InspectorScreen* inspectorScreen = new InspectorScreen();
+	this->uiTable[uiNames.INSPECTOR_SCREEN] = inspectorScreen;
+	this->uiList.push_back(inspectorScreen);
+
+	SceneOutlinerScreen* sceneOutlinerScreen = new SceneOutlinerScreen();
+	this->uiTable[uiNames.SCENE_OUTLINER_SCREEN] = sceneOutlinerScreen;
+	this->uiList.push_back(sceneOutlinerScreen);
 }
 
 UIManager::~UIManager()

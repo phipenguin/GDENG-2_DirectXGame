@@ -1,11 +1,17 @@
 #include "Cube.h"
 #include "GraphicsEngine.h"
+#include "ShaderLibrary.h"
 #include "DeviceContext.h"
 #include "SceneCameraHandler.h"
 #include <iostream>
 
-Cube::Cube(string name, void* shader_byte_code, size_t size_shader) : AGameObject(name)
+Cube::Cube(string name) : AGameObject(name)
 {
+	ShaderNames shaderNames;
+	void* shaderByteCode = NULL;
+	size_t sizeShader = 0;
+	ShaderLibrary::getInstance()->requestVertexShaderData(shaderNames.BASE_VERTEX_SHADER_NAME, &shaderByteCode, &sizeShader);
+
 	Vertex vextex_list[] =
 	{
 		//POSITION										COLOR1										COLOR2
@@ -36,7 +42,7 @@ Cube::Cube(string name, void* shader_byte_code, size_t size_shader) : AGameObjec
 	};
 
 	vertex_buffer = GraphicsEngine::getInstance()->getRenderSystem()->createVertexBuffer(vextex_list, 
-		sizeof(Vertex), ARRAYSIZE(vextex_list), shader_byte_code, size_shader);
+		sizeof(Vertex), ARRAYSIZE(vextex_list), shaderByteCode, sizeShader);
 
 	unsigned int index_list[]=
 	{
@@ -146,22 +152,18 @@ void Cube::update(float deltaTime)
 	//}
 }
 
-void Cube::draw(int width, int height, VertexShaderPtr vertex_shader, PixelShaderPtr pixel_shader)
+void Cube::draw(int width, int height)
 {
+	ShaderNames shaderNames;
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
 	DeviceContextPtr deviceContext = graphicsEngine->getInstance()->getRenderSystem()->getImmediateDeviceContext();
 
+	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
+	deviceContext->setRenderConfig(ShaderLibrary::getInstance()->getVertexShader(shaderNames.BASE_VERTEX_SHADER_NAME), 
+		ShaderLibrary::getInstance()->getPixelShader(shaderNames.BASE_PIXEL_SHADER_NAME));
+
 	CBData cbData = {};
 	cbData.time = this->ticks;
-
-	if (this->deltaPosition > 1.0f)
-	{
-		this->deltaPosition = 0.0f;
-	}
-	else
-	{
-		this->deltaPosition += this->deltaTime * 0.1f;
-	}
 
 	Matrix4x4 allMatrix; allMatrix.setIdentity();
 	Matrix4x4 translationMatrix; translationMatrix.setTranslation(this->getLocalPosition());
@@ -196,12 +198,8 @@ void Cube::draw(int width, int height, VertexShaderPtr vertex_shader, PixelShade
 
 	constant_buffer->update(deviceContext, &cbData);
 
-	deviceContext->setConstantBuffer(vertex_shader, this->constant_buffer);
-	deviceContext->setConstantBuffer(pixel_shader, this->constant_buffer);
-
-	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
-	deviceContext->setVertexShader(vertex_shader);
-	deviceContext->setPixelShader(pixel_shader);
+	deviceContext->setConstantBuffer(ShaderLibrary::getInstance()->getVertexShader(shaderNames.BASE_VERTEX_SHADER_NAME), this->constant_buffer);
+	deviceContext->setConstantBuffer(ShaderLibrary::getInstance()->getPixelShader(shaderNames.BASE_PIXEL_SHADER_NAME), this->constant_buffer);
 
 	//SET THE VERTICES OF THE TRIANGLE TO DRAW
 	deviceContext->setVertexBuffer(vertex_buffer);
@@ -215,4 +213,34 @@ void Cube::draw(int width, int height, VertexShaderPtr vertex_shader, PixelShade
 void Cube::setAnimationSpeed(float speed)
 {
 	this->speed = speed;
+}
+
+VertexBufferPtr Cube::getVertexBuffer()
+{
+	return this->vertex_buffer;
+}
+
+IndexBufferPtr Cube::getIndexBuffer()
+{
+	return this->index_buffer;
+}
+
+ConstantBufferPtr Cube::getConstantBuffer()
+{
+	return this->constant_buffer;
+}
+
+float Cube::getTicks()
+{
+	return this->ticks;
+}
+
+float Cube::getDeltaTime()
+{
+	return this->deltaTime;
+}
+
+float Cube::getAnimSpeed()
+{
+	return this->speed;
 }

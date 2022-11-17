@@ -1,5 +1,6 @@
 #include "AppWindow.h"
 #include "Vector3D.h"
+#include "ShaderLibrary.h"
 #include "InputSystem.h"
 #include "SceneCameraHandler.h"
 #include "UIManager.h"
@@ -51,8 +52,8 @@ void AppWindow::onUpdate()
 	RECT rc = this->getClientWindowRect();
 	deviceContext->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-	renderSystem->drawPlanes(rc.right - rc.left, rc.bottom - rc.top, m_vs, m_ps);
-	renderSystem->drawCubes(rc.right - rc.left, rc.bottom - rc.top, m_vs, m_ps);
+	renderSystem->drawPlanes(rc.right - rc.left, rc.bottom - rc.top);
+	renderSystem->drawCubes(rc.right - rc.left, rc.bottom - rc.top);
 	
 	SceneCameraHandler::getInstance()->update();
 
@@ -65,6 +66,7 @@ void AppWindow::onDestroy()
 {
 	Window::onDestroy();
 	InputSystem::destroy();
+	ShaderLibrary::destroy();
 	UIManager::destroy();
 	SceneCameraHandler::destroy();
 	GraphicsEngine::destroy();
@@ -111,20 +113,15 @@ void AppWindow::onRightMouseUp(const Point& mouse_pos)
 void AppWindow::createGraphicsWindow()
 {
 	GraphicsEngine::initialize();
+	ShaderLibrary::initialize();
 	SceneCameraHandler::initialize();
 	UIManager::initialize(this->m_hwnd);
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
 	RenderSystem* renderSystem = graphicsEngine->getRenderSystem();
-	renderSystem->createTexture();
+	//renderSystem->createTextureFromImageFile();
 
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain = renderSystem->createSwapChain(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
-
-	void* shader_byte_code = nullptr;
-	size_t size_shader = 0;
-
-	renderSystem->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
-	m_vs = renderSystem->createVertexShader(shader_byte_code, size_shader);
 
 	//for (int i = 0; i < 15; i++)
 	//{
@@ -137,13 +134,8 @@ void AppWindow::createGraphicsWindow()
 	//	numOfCubes++;
 	//	renderSystem->initializeCubes(shader_byte_code, size_shader);
 	//}
-
-	renderSystem->initializePlanes(shader_byte_code, size_shader);
-	renderSystem->initializeCubes(shader_byte_code, size_shader);
-
-	renderSystem->releaseCompiledShader();
-
-	renderSystem->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
-	m_ps = renderSystem->createPixelShader(shader_byte_code, size_shader);
-	renderSystem->releaseCompiledShader();
+		
+	renderSystem->initializePlanes();
+	renderSystem->initializeCubes();
+	renderSystem->initializeTexturedCubes();
 }

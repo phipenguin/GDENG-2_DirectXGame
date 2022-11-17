@@ -18,6 +18,17 @@ void MenuBar::drawUI()
 	UIManager* uiManager = UIManager::getInstance();
 
 	ImGui::BeginMainMenuBar();
+
+	if (ImGui::BeginMenu("File"))
+	{
+		ImGui::EndMenu();
+	}
+
+	if (ImGui::BeginMenu("Game Object"))
+	{
+		ImGui::EndMenu();
+	}
+
 	if (ImGui::BeginMenu("About"))
 	{
 		if (ImGui::MenuItem("Credits"))

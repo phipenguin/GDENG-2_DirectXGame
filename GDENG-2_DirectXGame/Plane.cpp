@@ -1,19 +1,80 @@
 #include "Plane.h"
 #include "GraphicsEngine.h"
+#include "ShaderLibrary.h"
 #include "DeviceContext.h"
 #include "SceneCameraHandler.h"
 
-Plane::Plane(string name, void* shader_byte_code, size_t size_shader) : AGameObject(name)
+Plane::Plane(string name) : AGameObject(name)
 {
+	ShaderNames shaderNames;
+	void* shaderByteCode = NULL;
+	size_t sizeShader = 0;
+	ShaderLibrary::getInstance()->requestVertexShaderData(shaderNames.BASE_VERTEX_SHADER_NAME, &shaderByteCode, &sizeShader);
+
+	//Vector3D position_list[] =
+	//{
+	//	//FRONT FACE
+	//	{Vector3D(-1.0f, 0.0f,-1.0f)},
+	//	{Vector3D(-1.0f, 0.0f,-1.0f)},
+	//	{Vector3D( 1.0f, 0.0f,-1.0f)},
+	//	{Vector3D( 1.0f, 0.0f,-1.0f)},
+
+	//	//BACK FACE
+	//	{Vector3D(-1.0f, 0.0f, 1.0f)},
+	//	{Vector3D(-1.0f, 0.0f, 1.0f)},
+	//	{Vector3D( 1.0f, 0.0f, 1.0f)},
+	//	{Vector3D( 1.0f, 0.0f, 1.0f)}
+	//};
+
+	//Vector2D texcoord_list[] =
+	//{
+	//	{Vector2D(0.0f, 0.0f)},
+	//	{Vector2D(0.0f, 1.0f)},
+	//	{Vector2D(1.0f, 0.0f)},
+	//	{Vector2D(1.0f, 1.0f)}
+	//};
+
 	Vertex vextex_list[] =
 	{
-		//POSITION										COLOR1										COLOR2
+		//{ position_list[0],texcoord_list[1] },
+		//{ position_list[1],texcoord_list[0] },
+		//{ position_list[2],texcoord_list[2] },
+		//{ position_list[3],texcoord_list[3] },
+
+
+		//{ position_list[4],texcoord_list[1] },
+		//{ position_list[5],texcoord_list[0] },
+		//{ position_list[6],texcoord_list[2] },
+		//{ position_list[7],texcoord_list[3] },
+
+
+		//{ position_list[1],texcoord_list[1] },
+		//{ position_list[6],texcoord_list[0] },
+		//{ position_list[5],texcoord_list[2] },
+		//{ position_list[2],texcoord_list[3] },
+
+		//{ position_list[7],texcoord_list[1] },
+		//{ position_list[0],texcoord_list[0] },
+		//{ position_list[3],texcoord_list[2] },
+		//{ position_list[4],texcoord_list[3] },
+
+		//{ position_list[3],texcoord_list[1] },
+		//{ position_list[2],texcoord_list[0] },
+		//{ position_list[5],texcoord_list[2] },
+		//{ position_list[4],texcoord_list[3] },
+
+		//{ position_list[7],texcoord_list[1] },
+		//{ position_list[6],texcoord_list[0] },
+		//{ position_list[1],texcoord_list[2] },
+		//{ position_list[0],texcoord_list[3] }
+
+		////POSITION										COLOR1										COLOR2
 		{Vector3D(-1.0f, 0.0f,-1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 		{Vector3D(-1.0f, 0.0f,-1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 		{Vector3D( 1.0f, 0.0f,-1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 		{Vector3D( 1.0f, 0.0f,-1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 
-		//POSITION										COLOR1										COLOR2
+		////POSITION										COLOR1										COLOR2
 		{Vector3D(-1.0f, 0.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 		{Vector3D(-1.0f, 0.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
 		{Vector3D( 1.0f, 0.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f),	Vector3D( 1.0f, 1.0f, 1.0f)},
@@ -21,10 +82,29 @@ Plane::Plane(string name, void* shader_byte_code, size_t size_shader) : AGameObj
 	};
 
 	vertex_buffer = GraphicsEngine::getInstance()->getRenderSystem()->createVertexBuffer(vextex_list, 
-		sizeof(Vertex), ARRAYSIZE(vextex_list), shader_byte_code, size_shader);
+		sizeof(Vertex), ARRAYSIZE(vextex_list), shaderByteCode, sizeShader);
 
 	unsigned int index_list[]=
 	{
+		////FRONT SIDE
+		//0,1,2,  //FIRST TRIANGLE
+		//2,3,0,  //SECOND TRIANGLE
+		////BACK SIDE
+		//4,5,6,
+		//6,7,4,
+		////TOP SIDE
+		//8,9,10,
+		//10,11,8,
+		////BOTTOM SIDE
+		//12,13,14,
+		//14,15,12,
+		////RIGHT SIDE
+		//16,17,18,
+		//18,19,16,
+		////LEFT SIDE
+		//20,21,22,
+		//22,23,20
+
 		//FRONT SIDE
 		0,1,2,  //FIRST TRIANGLE
 		2,3,0,  //SECOND TRIANGLE
@@ -67,22 +147,17 @@ void Plane::update(float deltaTime)
 	this->ticks += deltaTime;
 }
 
-void Plane::draw(int width, int height, VertexShaderPtr vertex_shader, PixelShaderPtr pixel_shader)
+void Plane::draw(int width, int height)
 {
+	ShaderNames shaderNames;
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
 	DeviceContextPtr deviceContext = graphicsEngine->getInstance()->getRenderSystem()->getImmediateDeviceContext();
-	
+
+	deviceContext->setRenderConfig(ShaderLibrary::getInstance()->getVertexShader(shaderNames.BASE_VERTEX_SHADER_NAME), 
+		ShaderLibrary::getInstance()->getPixelShader(shaderNames.BASE_PIXEL_SHADER_NAME));
+
 	CBData cbData = {};
 	cbData.time = this->ticks;
-
-	if (this->deltaPosition > 1.0f)
-	{
-		this->deltaPosition = 0.0f;
-	}
-	else
-	{
-		this->deltaPosition += this->deltaTime * 0.1f;
-	}
 
 	Matrix4x4 allMatrix; allMatrix.setIdentity();
 	Matrix4x4 translationMatrix; translationMatrix.setTranslation(this->getLocalPosition());
@@ -114,12 +189,8 @@ void Plane::draw(int width, int height, VertexShaderPtr vertex_shader, PixelShad
 
 	constant_buffer->update(graphicsEngine->getInstance()->getRenderSystem()->getImmediateDeviceContext(), &cbData);
 
-	deviceContext->setConstantBuffer(vertex_shader, constant_buffer);
-	deviceContext->setConstantBuffer(pixel_shader, constant_buffer);
-
-	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
-	deviceContext->setVertexShader(vertex_shader);
-	deviceContext->setPixelShader(pixel_shader);
+	deviceContext->setConstantBuffer(ShaderLibrary::getInstance()->getVertexShader(shaderNames.BASE_VERTEX_SHADER_NAME), constant_buffer);
+	deviceContext->setConstantBuffer(ShaderLibrary::getInstance()->getPixelShader(shaderNames.BASE_PIXEL_SHADER_NAME), constant_buffer);
 
 	//SET THE VERTICES OF THE TRIANGLE TO DRAW
 	deviceContext->setVertexBuffer(vertex_buffer);

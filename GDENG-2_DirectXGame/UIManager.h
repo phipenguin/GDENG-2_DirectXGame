@@ -15,6 +15,8 @@ public:
 	const String MENU_BAR = "MENU_BAR";
 	const String CREDITS_SCREEN = "CREDITS_SCREEN";
 	const String COLOR_PICKER_SCREEN = "COLOR_PICKER_SCREEN";
+	const String INSPECTOR_SCREEN = "INSPECTOR_SCREEN";
+	const String SCENE_OUTLINER_SCREEN = "SCENE_OUTLINER_SCREEN";
 };
 
 class UIManager

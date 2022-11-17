@@ -1,4 +1,5 @@
 #pragma once
+#include "Vector2D.h"
 #include "Vector3D.h"
 #include "Matrix4x4.h"
 #include "Prerequisites.h"
@@ -15,7 +16,7 @@ public:
 	~AGameObject();
 
 	virtual void update(float deltaTime) = 0;
-	virtual void draw(int width, int height, VertexShaderPtr vertex_shader, PixelShaderPtr pixel_shader) = 0;
+	virtual void draw(int width, int height) = 0;
 
 	void setPosition(float x, float y, float z);
 	void setPosition(Vector3D pos);

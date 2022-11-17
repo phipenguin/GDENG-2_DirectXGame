@@ -22,14 +22,8 @@
     <Filter Include="GameEngine\GameObject">
       <UniqueIdentifier>{0cf08f55-4193-4127-8b50-fa544efee847}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\GameObject\AGameObject">
-      <UniqueIdentifier>{2d3b3631-9d1c-46bc-abb0-eb969aaf221c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\Math">
       <UniqueIdentifier>{b6618e23-0fad-41ec-b76a-c13131ac2974}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\GameObject\Cube">
-      <UniqueIdentifier>{e042cda4-b5b9-46e6-8035-4c4068348301}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameEngine\GameObject\Plane">
       <UniqueIdentifier>{15c570ee-864c-420e-9a00-86bf0a94b3ca}</UniqueIdentifier>
@@ -73,6 +67,12 @@
     <Filter Include="GameEngine\GraphicsEngine\ResourceManager">
       <UniqueIdentifier>{025568b5-baba-4cf1-b544-6e451dcbef6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\GraphicsEngine\ResourceManager\TextureManager">
+      <UniqueIdentifier>{f577edd4-11c5-4cf2-aced-68cee4eaf888}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObject\Cube">
+      <UniqueIdentifier>{e042cda4-b5b9-46e6-8035-4c4068348301}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,9 +110,6 @@
     </ClCompile>
     <ClCompile Include="RenderSystem.cpp">
       <Filter>GameEngine\GraphicsEngine\RenderSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="AGameObject.cpp">
-      <Filter>GameEngine\GameObject\AGameObject</Filter>
     </ClCompile>
     <ClCompile Include="Plane.cpp">
       <Filter>GameEngine\GameObject\Plane</Filter>
@@ -171,6 +168,30 @@
     <ClCompile Include="ColorPickerScreen.cpp">
       <Filter>Editor\Screens</Filter>
     </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>GameEngine\GraphicsEngine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>GameEngine\GraphicsEngine\ResourceManager\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>GameEngine\GraphicsEngine\ResourceManager\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="AGameObject.cpp">
+      <Filter>GameEngine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="InspectorScreen.cpp">
+      <Filter>Editor\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneOutlinerScreen.cpp">
+      <Filter>Editor\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderLibrary.cpp">
+      <Filter>GameEngine\GraphicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturedCube.cpp">
+      <Filter>GameEngine\GameObject\Cube</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -205,9 +226,6 @@
     </ClInclude>
     <ClInclude Include="RenderSystem.h">
       <Filter>GameEngine\GraphicsEngine\RenderSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="AGameObject.h">
-      <Filter>GameEngine\GameObject\AGameObject</Filter>
     </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>GameEngine\GameObject\Plane</Filter>
@@ -288,6 +306,33 @@
     <ClInclude Include="ColorPickerScreen.h">
       <Filter>Editor\Screens</Filter>
     </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>GameEngine\GraphicsEngine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>GameEngine\GraphicsEngine\ResourceManager\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>GameEngine\GraphicsEngine\ResourceManager\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="AGameObject.h">
+      <Filter>GameEngine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="InspectorScreen.h">
+      <Filter>Editor\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneOutlinerScreen.h">
+      <Filter>Editor\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderLibrary.h">
+      <Filter>GameEngine\GraphicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturedCube.h">
+      <Filter>GameEngine\GameObject\Cube</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="shader.fx" />
@@ -295,6 +340,12 @@
       <Filter>App</Filter>
     </FxCompile>
     <FxCompile Include="PixelShader.hlsl">
+      <Filter>App</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturedPixelShader.hlsl">
+      <Filter>App</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturedVertexShader.hlsl">
       <Filter>App</Filter>
     </FxCompile>
   </ItemGroup>

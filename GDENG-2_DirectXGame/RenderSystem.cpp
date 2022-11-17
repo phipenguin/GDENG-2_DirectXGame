@@ -67,15 +67,6 @@ RenderSystem::~RenderSystem()
 	m_d3d_device->Release();
 }
 
-void RenderSystem::createTexture()
-{
-	ResourceManager* rm = new ResourceManager();
-
-	m_texture = NULL;
-	bool ret = rm->LoadTextureFromFile("De_La_Salle_University_Seal.png", &m_texture, &my_image_width, &my_image_height);
-	IM_ASSERT(ret);
-}
-
 SwapChainPtr RenderSystem::createSwapChain(HWND hwnd, UINT width, UINT height)
 {
 	SwapChainPtr sc = nullptr;
@@ -112,6 +103,15 @@ int RenderSystem::getImageWidth()
 {
 	return this->my_image_width;
 }
+
+//void RenderSystem::createTextureFromImageFile()
+//{
+//	ResourceManager* rm = new ResourceManager();
+//
+//	m_texture = NULL;
+//	bool ret = rm->LoadTextureFromImageFile("De_La_Salle_University_Seal.png", &m_texture, &my_image_width, &my_image_height);
+//	IM_ASSERT(ret);
+//}
 
 VertexBufferPtr RenderSystem::createVertexBuffer(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, size_t size_byte_shader)
 {
@@ -208,11 +208,11 @@ void RenderSystem::releaseCompiledShader()
 	if (m_blob) m_blob->Release();
 }
 
-void RenderSystem::initializePlanes(void* shader_byte_code, size_t size_shader)
+void RenderSystem::initializePlanes()
 {
     AppWindow* appWindow = AppWindow::getInstance();
 
-	Plane* plane = new Plane("Plane", shader_byte_code, size_shader);
+	Plane* plane = new Plane("Plane");
     plane->setAnimationSpeed(2.0f);
 
  //   //Level 1
@@ -306,17 +306,17 @@ void RenderSystem::initializePlanes(void* shader_byte_code, size_t size_shader)
     this->planesList.push_front(plane);
 }
 
-void RenderSystem::drawPlanes(int width, int height, VertexShaderPtr vertex_shader, PixelShaderPtr pixel_shader)
+void RenderSystem::drawPlanes(int width, int height)
 {
     //Iterate through the list of quads
     for (auto const& i : planesList)
     {
         i->update(EngineTime::getDeltaTime());
-        i->draw(width, height, vertex_shader, pixel_shader);
+        i->draw(width, height);
     }
 }
 
-void RenderSystem::initializeCubes(void* shader_byte_code, size_t size_shader)
+void RenderSystem::initializeCubes()
 {
 	//std::random_device rd; // obtain a random number from hardware
 	//std::mt19937 gen(rd()); // seed the generator
@@ -324,7 +324,7 @@ void RenderSystem::initializeCubes(void* shader_byte_code, size_t size_shader)
 
     AppWindow* appWindow = AppWindow::getInstance();
 
-    Cube* cuboid = new Cube("Cube", shader_byte_code, size_shader);
+    Cube* cuboid = new Cube("Cube");
     cuboid->setAnimationSpeed(2.0f);
 
  //   if (appWindow->numOfCubes == 1)
@@ -339,12 +339,24 @@ void RenderSystem::initializeCubes(void* shader_byte_code, size_t size_shader)
     this->cubesList.push_front(cuboid);
 }
 
-void RenderSystem::drawCubes(int width, int height, VertexShaderPtr vertex_shader, PixelShaderPtr pixel_shader)
+void RenderSystem::initializeTexturedCubes()
+{
+	AppWindow* appWindow = AppWindow::getInstance();
+
+    TexturedCube* texcuboid = new TexturedCube("Textured Cube");
+    texcuboid->setAnimationSpeed(2.0f);
+
+	texcuboid->setPosition(Vector3D(1.0f, 0.0f, 0.0f));
+	texcuboid->setScale(Vector3D(1.0f, 1.0f, 1.0f));
+    this->cubesList.push_front(texcuboid);
+}
+
+void RenderSystem::drawCubes(int width, int height)
 {
     //Iterate through the list of cubes
     for (auto const& i : cubesList)
     {
         i->update(EngineTime::getDeltaTime());
-        i->draw(width, height, vertex_shader, pixel_shader);
+        i->draw(width, height);
     }
 }

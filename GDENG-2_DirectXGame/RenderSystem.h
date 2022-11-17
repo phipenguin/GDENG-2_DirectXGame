@@ -2,6 +2,7 @@
 #include "Prerequisites.h"
 #include "Plane.h"
 #include "Cube.h"
+#include "TexturedCube.h"
 #include <list>
 #include <d3d11.h>
 
@@ -11,14 +12,15 @@ public:
 	RenderSystem();
 	~RenderSystem();
 
-	void createTexture();
-
 	SwapChainPtr createSwapChain(HWND hwnd, UINT width, UINT height);
 	DeviceContextPtr getImmediateDeviceContext();
 	ID3D11Device* getDirectXDevice();
+
+	//For Rendering Texture from Image
 	ID3D11ShaderResourceView* getTexture();
 	int getImageHeight();
 	int getImageWidth();
+	//void createTextureFromImageFile();
 
 	VertexBufferPtr createVertexBuffer(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, size_t size_byte_shader);
 	IndexBufferPtr createIndexBuffer(void* list_indices, UINT size_list);
@@ -33,12 +35,13 @@ public:
 
 
 	//For Planes
-	void initializePlanes(void* shader_byte_code, size_t size_shader);
-	void drawPlanes(int width, int height, VertexShaderPtr vertex_shader, PixelShaderPtr pixel_shader);
+	void initializePlanes();
+	void drawPlanes(int width, int height);
 
 	//For Cubes
-	void initializeCubes(void* shader_byte_code, size_t size_shader);
-	void drawCubes(int width, int height, VertexShaderPtr vertex_shader, PixelShaderPtr pixel_shader);
+	void initializeCubes();
+	void initializeTexturedCubes();
+	void drawCubes(int width, int height);
 
 private:
 	DeviceContextPtr m_imm_device_context;
@@ -73,4 +76,5 @@ private:
 	friend class ConstantBuffer;
 	friend class VertexShader;
 	friend class PixelShader;
+	friend class Texture;
 };
