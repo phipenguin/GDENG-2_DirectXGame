@@ -12,8 +12,9 @@
 class UINames
 {
 public:
-	const String MENU_SCREEN = "MENU_SCREEN";
+	const String MENU_BAR = "MENU_BAR";
 	const String CREDITS_SCREEN = "CREDITS_SCREEN";
+	const String COLOR_PICKER_SCREEN = "COLOR_PICKER_SCREEN";
 };
 
 class UIManager
@@ -28,6 +29,8 @@ public:
 	static void destroy();
 
 	void drawAllUI();
+
+	UITable getUITable();
 
 	static const int WINDOW_WIDTH = 1440;
 	static const int WINDOW_HEIGHT = 900;

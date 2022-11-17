@@ -23,6 +23,7 @@
     <ClCompile Include="AppWindow.cpp" />
     <ClCompile Include="AUIScreen.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ColorPickerScreen.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="CreditsScreen.cpp" />
     <ClCompile Include="Cube.cpp" />
@@ -39,7 +40,7 @@
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MenuScreen.cpp" />
+    <ClCompile Include="MenuBar.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
@@ -56,6 +57,7 @@
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="AUIScreen.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ColorPickerScreen.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="CreditsScreen.h" />
     <ClInclude Include="Cube.h" />
@@ -74,7 +76,7 @@
     <ClInclude Include="InputListener.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Matrix4x4.h" />
-    <ClInclude Include="MenuScreen.h" />
+    <ClInclude Include="MenuBar.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Point.h" />

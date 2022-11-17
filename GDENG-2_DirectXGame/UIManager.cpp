@@ -1,8 +1,9 @@
 #include "UIManager.h"
 #include "GraphicsEngine.h"
 #include "DeviceContext.h"
-#include "MenuScreen.h"
+#include "MenuBar.h"
 #include "CreditsScreen.h"
+#include "ColorPickerScreen.h"
 
 UIManager* UIManager::sharedInstance = nullptr;
 
@@ -36,6 +37,11 @@ void UIManager::drawAllUI()
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 
+UIManager::UITable UIManager::getUITable()
+{
+	return this->uiTable;
+}
+
 UIManager::UIManager(HWND hwnd)
 {
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
@@ -44,19 +50,23 @@ UIManager::UIManager(HWND hwnd)
 	//Setup ImGui
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui_ImplWin32_Init(hwnd);
 	ImGui_ImplDX11_Init(renderSystem->getDirectXDevice(), renderSystem->getImmediateDeviceContext()->getContext());
 	ImGui::StyleColorsDark();
 
 	UINames uiNames;
-	MenuScreen* menuScreen = new MenuScreen();
-	this->uiTable[uiNames.MENU_SCREEN] = menuScreen;
-	this->uiList.push_back(menuScreen);
+	MenuBar* menuBar = new MenuBar();
+	this->uiTable[uiNames.MENU_BAR] = menuBar;
+	this->uiList.push_back(menuBar);
 
 	CreditsScreen* creditsScreen = new CreditsScreen();
-	this->uiTable[uiNames.MENU_SCREEN] = creditsScreen;
+	this->uiTable[uiNames.CREDITS_SCREEN] = creditsScreen;
 	this->uiList.push_back(creditsScreen);
+
+	ColorPickerScreen* colorPickerScreen = new ColorPickerScreen();
+	this->uiTable[uiNames.COLOR_PICKER_SCREEN] = colorPickerScreen;
+	this->uiList.push_back(colorPickerScreen);
 }
 
 UIManager::~UIManager()

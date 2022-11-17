@@ -9,6 +9,9 @@ class UIManager;
 
 class AUIScreen
 {
+public:
+	bool isWindowOpen = true;
+	
 protected:
 	typedef std::string String;
 

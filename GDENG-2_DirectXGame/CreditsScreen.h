@@ -4,7 +4,7 @@
 class UIManager;
 class CreditsScreen : public AUIScreen
 {
-	private:
+private:
 	CreditsScreen();
 	~CreditsScreen();
 

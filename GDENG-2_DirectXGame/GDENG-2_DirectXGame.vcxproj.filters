@@ -159,14 +159,17 @@
     <ClCompile Include="UIManager.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
-    <ClCompile Include="MenuScreen.cpp">
-      <Filter>Editor\Screens</Filter>
-    </ClCompile>
     <ClCompile Include="CreditsScreen.cpp">
       <Filter>Editor\Screens</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>GameEngine\GraphicsEngine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuBar.cpp">
+      <Filter>Editor\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorPickerScreen.cpp">
+      <Filter>Editor\Screens</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -272,15 +275,18 @@
     <ClInclude Include="UIManager.h">
       <Filter>Editor</Filter>
     </ClInclude>
-    <ClInclude Include="MenuScreen.h">
-      <Filter>Editor\Screens</Filter>
-    </ClInclude>
     <ClInclude Include="CreditsScreen.h">
       <Filter>Editor\Screens</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="ResourceManager.h">
       <Filter>GameEngine\GraphicsEngine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuBar.h">
+      <Filter>Editor\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorPickerScreen.h">
+      <Filter>Editor\Screens</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

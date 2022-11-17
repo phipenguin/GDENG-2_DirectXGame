@@ -1,19 +1,2 @@
-﻿  MenuScreen.cpp
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(41,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(42,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(43,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(44,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(50,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(51,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(52,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(53,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(59,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(60,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(61,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(62,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(106,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(107,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(108,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(109,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(153,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  ColorPickerScreen.cpp
   GDENG-2_DirectXGame.vcxproj -> D:\Apps\Github\GDENG-2_DirectXGame\Debug\GDENG-2_DirectXGame.exe
