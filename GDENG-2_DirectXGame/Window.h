@@ -1,6 +1,6 @@
 #pragma once
+#define NOMINMAX
 #include "EngineTime.h"
-
 #include <Windows.h>
 
 class Window

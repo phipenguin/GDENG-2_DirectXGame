@@ -25,9 +25,6 @@
     <Filter Include="GameEngine\Math">
       <UniqueIdentifier>{b6618e23-0fad-41ec-b76a-c13131ac2974}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\GameObject\Plane">
-      <UniqueIdentifier>{15c570ee-864c-420e-9a00-86bf0a94b3ca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\InputSystem">
       <UniqueIdentifier>{b54180e8-cc9e-4d85-9ba0-eda81b1bacea}</UniqueIdentifier>
     </Filter>
@@ -70,8 +67,23 @@
     <Filter Include="GameEngine\GraphicsEngine\ResourceManager\TextureManager">
       <UniqueIdentifier>{f577edd4-11c5-4cf2-aced-68cee4eaf888}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\GameObject\Cube">
+    <Filter Include="GameEngine\GraphicsEngine\ResourceManager\MeshManager">
+      <UniqueIdentifier>{1eb32574-b0e3-47a6-8450-3ea7485192e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObject\Primitives">
+      <UniqueIdentifier>{f000c32f-16a9-40a8-a907-92913c307097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObject\Primitives\Plane">
+      <UniqueIdentifier>{15c570ee-864c-420e-9a00-86bf0a94b3ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObject\Primitives\Cube">
       <UniqueIdentifier>{e042cda4-b5b9-46e6-8035-4c4068348301}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObject\Non-Primitives">
+      <UniqueIdentifier>{db9e06a9-81e3-45de-8cc6-bfa730510398}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GameObject\Non-Primitives\Teapot">
+      <UniqueIdentifier>{2ae2c742-af2a-4ceb-afd6-cf30f57122cf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -112,13 +124,13 @@
       <Filter>GameEngine\GraphicsEngine\RenderSystem</Filter>
     </ClCompile>
     <ClCompile Include="Plane.cpp">
-      <Filter>GameEngine\GameObject\Plane</Filter>
+      <Filter>GameEngine\GameObject\Primitives\Plane</Filter>
     </ClCompile>
     <ClCompile Include="IndexBuffer.cpp">
       <Filter>GameEngine\GraphicsEngine\RenderSystem\IndexBuffer</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
-      <Filter>GameEngine\GameObject\Cube</Filter>
+      <Filter>GameEngine\GameObject\Primitives\Cube</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
       <Filter>GameEngine\InputSystem</Filter>
@@ -190,7 +202,19 @@
       <Filter>GameEngine\GraphicsEngine</Filter>
     </ClCompile>
     <ClCompile Include="TexturedCube.cpp">
-      <Filter>GameEngine\GameObject\Cube</Filter>
+      <Filter>GameEngine\GameObject\Primitives\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshManager.cpp">
+      <Filter>GameEngine\GraphicsEngine\ResourceManager\MeshManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>GameEngine\GraphicsEngine\ResourceManager\MeshManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Teapot.cpp">
+      <Filter>GameEngine\GameObject\Non-Primitives\Teapot</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBufferTextured.cpp">
+      <Filter>GameEngine\GraphicsEngine\RenderSystem\VertexBuffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,7 +252,7 @@
       <Filter>GameEngine\GraphicsEngine\RenderSystem</Filter>
     </ClInclude>
     <ClInclude Include="Plane.h">
-      <Filter>GameEngine\GameObject\Plane</Filter>
+      <Filter>GameEngine\GameObject\Primitives\Plane</Filter>
     </ClInclude>
     <ClInclude Include="Vector3D.h">
       <Filter>GameEngine\Math</Filter>
@@ -243,7 +267,7 @@
       <Filter>GameEngine\GraphicsEngine\RenderSystem\IndexBuffer</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
-      <Filter>GameEngine\GameObject\Cube</Filter>
+      <Filter>GameEngine\GameObject\Primitives\Cube</Filter>
     </ClInclude>
     <ClInclude Include="InputSystem.h">
       <Filter>GameEngine\InputSystem</Filter>
@@ -331,7 +355,22 @@
       <Filter>GameEngine\GraphicsEngine</Filter>
     </ClInclude>
     <ClInclude Include="TexturedCube.h">
-      <Filter>GameEngine\GameObject\Cube</Filter>
+      <Filter>GameEngine\GameObject\Primitives\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshManager.h">
+      <Filter>GameEngine\GraphicsEngine\ResourceManager\MeshManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>GameEngine\GraphicsEngine\ResourceManager\MeshManager</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexMesh.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Teapot.h">
+      <Filter>GameEngine\GameObject\Non-Primitives\Teapot</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBufferTextured.h">
+      <Filter>GameEngine\GraphicsEngine\RenderSystem\VertexBuffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -347,6 +386,9 @@
     </FxCompile>
     <FxCompile Include="TexturedVertexShader.hlsl">
       <Filter>App</Filter>
+    </FxCompile>
+    <FxCompile Include="VertexMeshLayoutShader.hlsl">
+      <Filter>GameEngine\GraphicsEngine</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

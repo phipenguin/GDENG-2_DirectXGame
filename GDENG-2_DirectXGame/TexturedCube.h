@@ -15,6 +15,8 @@ public:
 private:
 	TexturePtr woodTex;
 
+	VertexBufferTexturedPtr m_vertex_buffer_textured;
+
 	struct Vertex
 	{
 		Vector3D position;

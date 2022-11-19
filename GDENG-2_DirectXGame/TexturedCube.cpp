@@ -70,7 +70,7 @@ TexturedCube::TexturedCube(string name) : Cube(name)
 		{ position_list[0],texcoord_list[3] }
 	};
 
-	this->getVertexBuffer() = GraphicsEngine::getInstance()->getRenderSystem()->createVertexBuffer(vextex_list, 
+	m_vertex_buffer_textured = GraphicsEngine::getInstance()->getRenderSystem()->createVertexBufferTextured(vextex_list, 
 		sizeof(Vertex), ARRAYSIZE(vextex_list), shaderByteCode, sizeShader);
 
 	unsigned int index_list[]=
@@ -161,7 +161,7 @@ void TexturedCube::draw(int width, int height)
 	deviceContext->setTexture(ShaderLibrary::getInstance()->getPixelShader(shaderNames.TEXTURED_PIXEL_SHADER_NAME), woodTex);
 
 	//SET THE VERTICES OF THE TRIANGLE TO DRAW
-	deviceContext->setVertexBuffer(this->getVertexBuffer());
+	deviceContext->setVertexBufferTextured(m_vertex_buffer_textured);
 	//SET THE INDICES OF THE TRIANGLE TO DRAW
 	deviceContext->setIndexBuffer(this->getIndexBuffer());
 

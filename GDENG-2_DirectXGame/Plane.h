@@ -1,8 +1,6 @@
 #pragma once
 #include "AGameObject.h"
 #include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "ConstantBuffer.h"
 
 class Plane : public AGameObject
 {

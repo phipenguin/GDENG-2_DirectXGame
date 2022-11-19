@@ -42,6 +42,8 @@
     <ClCompile Include="InspectorScreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuBar.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshManager.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
@@ -51,11 +53,13 @@
     <ClCompile Include="SceneOutlinerScreen.cpp" />
     <ClCompile Include="ShaderLibrary.cpp" />
     <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="Teapot.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturedCube.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
+    <ClCompile Include="VertexBufferTextured.cpp" />
     <ClCompile Include="VertexShader.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -85,6 +89,8 @@
     <ClInclude Include="InspectorScreen.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="MenuBar.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshManager.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Point.h" />
@@ -97,6 +103,7 @@
     <ClInclude Include="ShaderLibrary.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="Teapot.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TexturedCube.h" />
     <ClInclude Include="TextureManager.h" />
@@ -105,6 +112,8 @@
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="Vector4D.h" />
     <ClInclude Include="VertexBuffer.h" />
+    <ClInclude Include="VertexBufferTextured.h" />
+    <ClInclude Include="VertexMesh.h" />
     <ClInclude Include="VertexShader.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
@@ -117,6 +126,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="TexturedVertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="VertexMeshLayoutShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
@@ -183,20 +199,21 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>Libs\DirectXTex\include;$(IncludePath)</IncludePath>
-    <LibraryPath>Libs\DirectXTex\bin;$(LibraryPath)</LibraryPath>
+    <IncludePath>Libs\DirectXTex\include;Libs\tinyobjloader\include</IncludePath>
+    <LibraryPath>Libs\DirectXTex\bin;Libs\ReactPhysics3D;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOMINMAX;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>Libs\ReactPhysics3D\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;DirectXTexD_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;DirectXTexD_x86.lib;reactphysics3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <ShaderType>Effect</ShaderType>

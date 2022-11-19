@@ -4,6 +4,7 @@
 #include "SwapChain.h"
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
+#include "VertexBufferTextured.h"
 #include "IndexBuffer.h"
 #include "ConstantBuffer.h"
 #include "VertexShader.h"
@@ -89,20 +90,20 @@ ID3D11Device* RenderSystem::getDirectXDevice()
 	return this->m_d3d_device;
 }
 
-ID3D11ShaderResourceView* RenderSystem::getTexture()
-{
-	return this->m_texture;
-}
+//ID3D11ShaderResourceView* RenderSystem::getTexture()
+//{
+//	return this->m_texture;
+//}
 
-int RenderSystem::getImageHeight()
-{
-	return this->my_image_height;
-}
-
-int RenderSystem::getImageWidth()
-{
-	return this->my_image_width;
-}
+//int RenderSystem::getImageHeight()
+//{
+//	return this->my_image_height;
+//}
+//
+//int RenderSystem::getImageWidth()
+//{
+//	return this->my_image_width;
+//}
 
 //void RenderSystem::createTextureFromImageFile()
 //{
@@ -123,6 +124,19 @@ VertexBufferPtr RenderSystem::createVertexBuffer(void* list_vertices, UINT size_
 	catch(...) {}
 
 	return vb;
+}
+
+VertexBufferTexturedPtr RenderSystem::createVertexBufferTextured(void* list_vertices, UINT size_vertex, UINT size_list,
+	void* shader_byte_code, size_t size_byte_shader)
+{
+	VertexBufferTexturedPtr vbt = nullptr;
+	try
+	{
+		vbt = std::make_shared<VertexBufferTextured>(list_vertices, size_vertex, size_list, shader_byte_code, size_byte_shader, this);
+	}
+	catch(...) {}
+
+	return vbt;
 }
 
 IndexBufferPtr RenderSystem::createIndexBuffer(void* list_indices, UINT size_list)
@@ -308,7 +322,6 @@ void RenderSystem::initializePlanes()
 
 void RenderSystem::drawPlanes(int width, int height)
 {
-    //Iterate through the list of quads
     for (auto const& i : planesList)
     {
         i->update(EngineTime::getDeltaTime());
@@ -355,6 +368,27 @@ void RenderSystem::drawCubes(int width, int height)
 {
     //Iterate through the list of cubes
     for (auto const& i : cubesList)
+    {
+        i->update(EngineTime::getDeltaTime());
+        i->draw(width, height);
+    }
+}
+
+void RenderSystem::initializeTeapots()
+{
+	AppWindow* appWindow = AppWindow::getInstance();
+
+    Teapot* teapot = new Teapot("Teapot");
+    teapot->setAnimationSpeed(2.0f);
+
+	teapot->setPosition(Vector3D(3.0f, 0.0f, 0.0f));
+	teapot->setScale(Vector3D(2.0f, 2.0f, 2.0f));
+    this->teapotList.push_front(teapot);
+}
+
+void RenderSystem::drawTeapots(int width, int height)
+{
+    for (auto const& i : teapotList)
     {
         i->update(EngineTime::getDeltaTime());
         i->draw(width, height);

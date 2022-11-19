@@ -52,8 +52,9 @@ void AppWindow::onUpdate()
 	RECT rc = this->getClientWindowRect();
 	deviceContext->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-	renderSystem->drawPlanes(rc.right - rc.left, rc.bottom - rc.top);
-	renderSystem->drawCubes(rc.right - rc.left, rc.bottom - rc.top);
+	//renderSystem->drawPlanes(rc.right - rc.left, rc.bottom - rc.top);
+	//renderSystem->drawCubes(rc.right - rc.left, rc.bottom - rc.top);
+	renderSystem->drawTeapots(rc.right - rc.left, rc.bottom - rc.top);
 	
 	SceneCameraHandler::getInstance()->update();
 
@@ -118,6 +119,7 @@ void AppWindow::createGraphicsWindow()
 	UIManager::initialize(this->m_hwnd);
 	GraphicsEngine* graphicsEngine = GraphicsEngine::getInstance();
 	RenderSystem* renderSystem = graphicsEngine->getRenderSystem();
+	graphicsEngine->initializeMeshManager();
 	//renderSystem->createTextureFromImageFile();
 
 	RECT rc = this->getClientWindowRect();
@@ -135,7 +137,8 @@ void AppWindow::createGraphicsWindow()
 	//	renderSystem->initializeCubes(shader_byte_code, size_shader);
 	//}
 		
-	renderSystem->initializePlanes();
-	renderSystem->initializeCubes();
-	renderSystem->initializeTexturedCubes();
+	//renderSystem->initializePlanes();
+	//renderSystem->initializeCubes();
+	//renderSystem->initializeTexturedCubes();
+	renderSystem->initializeTeapots();
 }

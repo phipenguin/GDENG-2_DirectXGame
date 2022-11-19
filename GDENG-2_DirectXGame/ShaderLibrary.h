@@ -14,6 +14,7 @@ public:
 	//vertex shader names
 	const String BASE_VERTEX_SHADER_NAME = L"VertexShader.hlsl";
 	const String TEXTURED_VERTEX_SHADER_NAME = L"TexturedVertexShader.hlsl";
+	const String VERTEX_MESH_LAYOUT_SHADER_NAME = L"VertexMeshLayoutShader.hlsl";
 
 	//pixel shader names
 	const String BASE_PIXEL_SHADER_NAME = L"PixelShader.hlsl";
@@ -43,6 +44,8 @@ public:
 	VertexShaderPtr getVertexShader(String vertexShaderName);
 	PixelShaderPtr getPixelShader(String pixelShaderName);
 
+	void getVertexMeshLayoutShaderByteCodeAndSize(void** byte_code, size_t* size);
+
 private:
 	ShaderLibrary();
 	~ShaderLibrary();
@@ -52,4 +55,7 @@ private:
 
 	VertexShaderTable activeVertexShaders;
 	PixelShaderTable activePixelShaders;
+
+	unsigned char m_mesh_layout_byte_code[1024];
+	size_t m_mesh_layout_size = 0;
 };

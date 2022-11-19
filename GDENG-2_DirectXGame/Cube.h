@@ -1,8 +1,6 @@
 #pragma once
 #include "AGameObject.h"
 #include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "ConstantBuffer.h"
 
 class Cube : public AGameObject
 {
@@ -19,7 +17,6 @@ public:
 	IndexBufferPtr getIndexBuffer();
 	ConstantBufferPtr getConstantBuffer();
 	float getTicks();
-	float getDeltaPosition();
 	float getDeltaTime();
 	float getAnimSpeed();
 

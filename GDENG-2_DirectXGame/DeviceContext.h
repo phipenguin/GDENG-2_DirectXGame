@@ -8,6 +8,7 @@ public:
 	DeviceContext(ID3D11DeviceContext* device_context, RenderSystem* system);
 	void clearRenderTargetColor(const SwapChainPtr& swap_chain,float red, float green, float blue, float alpha);
 	void setVertexBuffer(const VertexBufferPtr& vertex_buffer);
+	void setVertexBufferTextured(const VertexBufferTexturedPtr& vertex_buffer_textured);
 	void setIndexBuffer(const IndexBufferPtr& index_buffer);
 
 	void drawTriangleList(UINT vertex_count, UINT start_vertex_index);

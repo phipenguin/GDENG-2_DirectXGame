@@ -17,19 +17,25 @@ void GraphicsEngine::initialize()
 
 void GraphicsEngine::destroy()
 {
-	delete sharedInstance->getRenderSystem();
 	delete sharedInstance->getTextureManager();
+	delete sharedInstance->getMeshManager();
+	delete sharedInstance->getRenderSystem();
 	delete sharedInstance;
 }
 
 RenderSystem* GraphicsEngine::getRenderSystem()
 {
-	return m_render_system;
+	return this->m_render_system;
 }
 
 TextureManager* GraphicsEngine::getTextureManager()
 {
-	return m_tex_manager;
+	return this->m_tex_manager;
+}
+
+MeshManager* GraphicsEngine::getMeshManager()
+{
+	return this->m_mesh_manager;
 }
 
 GraphicsEngine::GraphicsEngine()
@@ -38,4 +44,9 @@ GraphicsEngine::GraphicsEngine()
 
 GraphicsEngine::~GraphicsEngine()
 {
+}
+
+void GraphicsEngine::initializeMeshManager()
+{
+	sharedInstance->m_mesh_manager = new MeshManager();
 }

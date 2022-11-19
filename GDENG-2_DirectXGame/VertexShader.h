@@ -14,4 +14,3 @@ private:
 	friend class RenderSystem;
 	friend class DeviceContext;
 };
-

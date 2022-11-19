@@ -1,6 +1,7 @@
 #include "DeviceContext.h"
 #include "SwapChain.h"
 #include "VertexBuffer.h"
+#include "VertexBufferTextured.h"
 #include "IndexBuffer.h"
 #include "ConstantBuffer.h"
 #include "VertexShader.h"
@@ -27,6 +28,14 @@ void DeviceContext::setVertexBuffer(const VertexBufferPtr& vertex_buffer)
 	UINT offset = 0;
 	m_device_context->IASetVertexBuffers(0, 1, &vertex_buffer->m_buffer, &stride, &offset);
 	m_device_context->IASetInputLayout(vertex_buffer->m_layout);
+}
+
+void DeviceContext::setVertexBufferTextured(const VertexBufferTexturedPtr& vertex_buffer_textured)
+{
+	UINT stride = vertex_buffer_textured->m_size_vertex;
+	UINT offset = 0;
+	m_device_context->IASetVertexBuffers(0, 1, &vertex_buffer_textured->m_buffer, &stride, &offset);
+	m_device_context->IASetInputLayout(vertex_buffer_textured->m_layout);
 }
 
 void DeviceContext::setIndexBuffer(const IndexBufferPtr& index_buffer)

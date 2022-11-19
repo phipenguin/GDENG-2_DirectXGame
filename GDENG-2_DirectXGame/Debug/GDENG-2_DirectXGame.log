@@ -1,6 +1,35 @@
-﻿  ShaderLibrary.cpp
+﻿  AppWindow.cpp
 D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(106,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(107,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(108,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(109,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Teapot.cpp
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(41,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(42,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(43,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(44,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(50,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(51,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(52,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(53,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(59,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(60,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(61,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(62,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(106,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(107,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(108,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(109,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Apps\Github\GDENG-2_DirectXGame\GDENG-2_DirectXGame\Matrix4x4.h(153,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+DirectXTexD_x86.lib(BC.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(BC.obj)' or at 'D:\Apps\Github\GDENG-2_DirectXGame\Debug\DirectXTex.pdb'; linking object as if no debug info
+DirectXTexD_x86.lib(BC4BC5.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(BC4BC5.obj)' or at 'D:\Apps\Github\GDENG-2_DirectXGame\Debug\DirectXTex.pdb'; linking object as if no debug info
+DirectXTexD_x86.lib(BC6HBC7.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(BC6HBC7.obj)' or at 'D:\Apps\Github\GDENG-2_DirectXGame\Debug\DirectXTex.pdb'; linking object as if no debug info
+DirectXTexD_x86.lib(DirectXTexCompress.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(DirectXTexCompress.obj)' or at 'D:\Apps\Github\GDENG-2_DirectXGame\Debug\DirectXTex.pdb'; linking object as if no debug info
+DirectXTexD_x86.lib(DirectXTexConvert.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(DirectXTexConvert.obj)' or at 'D:\Apps\Github\GDENG-2_DirectXGame\Debug\DirectXTex.pdb'; linking object as if no debug info
+DirectXTexD_x86.lib(DirectXTexD3D11.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(DirectXTexD3D11.obj)' or at 'D:\Apps\Github\GDENG-2_DirectXGame\Debug\DirectXTex.pdb'; linking object as if no debug info
+DirectXTexD_x86.lib(DirectXTexImage.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(DirectXTexImage.obj)' or at 'D:\Apps\Github\GDENG-2_DirectXGame\Debug\DirectXTex.pdb'; linking object as if no debug info
+DirectXTexD_x86.lib(DirectXTexMipMaps.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(DirectXTexMipMaps.obj)' or at 'D:\Apps\Github\GDENG-2_DirectXGame\Debug\DirectXTex.pdb'; linking object as if no debug info
+DirectXTexD_x86.lib(DirectXTexUtil.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(DirectXTexUtil.obj)' or at 'D:\Apps\Github\GDENG-2_DirectXGame\Debug\DirectXTex.pdb'; linking object as if no debug info
+DirectXTexD_x86.lib(DirectXTexWIC.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(DirectXTexWIC.obj)' or at 'D:\Apps\Github\GDENG-2_DirectXGame\Debug\DirectXTex.pdb'; linking object as if no debug info
   GDENG-2_DirectXGame.vcxproj -> D:\Apps\Github\GDENG-2_DirectXGame\Debug\GDENG-2_DirectXGame.exe
